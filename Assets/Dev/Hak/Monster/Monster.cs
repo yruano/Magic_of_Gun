@@ -49,7 +49,7 @@ public class Monster : MonoBehaviour, IDamageable
         yield return null;
     }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         stat.HP -= damage;
 
