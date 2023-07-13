@@ -20,7 +20,7 @@ public class MonsterStat
         Defense = 5f;
     }
 }
-public class Monster : MonoBehaviour
+public class Monster : MonoBehaviour, IDamageable
 {
     private Func<IEnumerator> NextPattern;
     private Coroutine CurrentPattern = null;
@@ -47,5 +47,15 @@ public class Monster : MonoBehaviour
     {
         CurrentPattern = null;
         yield return null;
+    }
+
+    public void Damage(int damage)
+    {
+        stat.HP -= damage;
+
+        if (stat.HP == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -21,7 +21,8 @@ public class MonsterSpawn : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            Instantiate(P_Monster[Random.Range(0, 4)], _pos[i], Quaternion.identity);
+            // Random.Range(0, 4)
+            Instantiate(P_Monster[0], _pos[i], Quaternion.identity);
         }
     }
 
