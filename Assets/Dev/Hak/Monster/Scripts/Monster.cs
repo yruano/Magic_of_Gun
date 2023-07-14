@@ -39,11 +39,24 @@ public class Monster : MonoBehaviour, IDamageable
 
     public virtual void Damage(int damage)
     {
-        Stats.HP -= damage;
 
-        if (Stats.HP == 0)
+        if (Stats.Defense == 0)
         {
-            Destroy(gameObject);
+            Stats.HP -= damage;
         }
+        else
+        {
+            if (Stats.Defense >= damage)
+            {
+                Stats.Defense -= damage;
+            }
+            else
+            {
+                damage -= Stats.Defense;
+                Stats.Defense = 0;
+                Stats.HP -= damage;
+            }
+        }
+        Destroy(gameObject);
     }
 }
