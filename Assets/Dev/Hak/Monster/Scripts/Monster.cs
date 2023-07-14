@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MonsterStat
+public class MonsterStats
 {
     [SerializeField]
     public float HP;
@@ -13,47 +13,34 @@ public class MonsterStat
     [SerializeField]
     public float Defense;
 
-    public MonsterStat()
+    public MonsterStats()
     {
         HP = 10f;
-        Damage = 10f;
+        Damage = 10;
         Defense = 5f;
     }
 }
 public class Monster : MonoBehaviour, IDamageable
 {
-    private Func<IEnumerator> NextPattern;
-    private Coroutine CurrentPattern = null;
-    public MonsterStat stat;
-    private void Start()
-    {
-        NextPattern = PatternAttack;
-    }
+    protected Func<IEnumerator> NextPattern;
+    protected Coroutine CurrentPattern = null;
+    protected bool _patternDone = true;
+    public MonsterStats Stats = new();
 
-    private void Update()
+    protected virtual void Update()
     {
-        if (CurrentPattern is null && NextPattern is not null && Input.GetKeyDown(KeyCode.W))
+        if (_patternDone is true && NextPattern is not null && Input.GetKeyDown(KeyCode.W))
+        {
+            _patternDone = false;
             CurrentPattern = StartCoroutine(NextPattern());
+        }
     }
 
-    private IEnumerator PatternAttack()
+    public virtual void Damage(int damage)
     {
-        CurrentPattern = null;
-        NextPattern = PatternSkill;
-        yield return null;
-    }
+        Stats.HP -= damage;
 
-    private IEnumerator PatternSkill()
-    {
-        CurrentPattern = null;
-        yield return null;
-    }
-
-    public void Damage(float damage)
-    {
-        stat.HP -= damage;
-
-        if (stat.HP == 0)
+        if (Stats.HP == 0)
         {
             Destroy(gameObject);
         }
