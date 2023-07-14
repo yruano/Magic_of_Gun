@@ -7,18 +7,18 @@ using UnityEngine;
 public class MonsterStats
 {
     [SerializeField]
-    public float HP;
+    public int HP;
     [SerializeField]
-    public float Damage;
+    public int Damage;
     [SerializeField]
-    public float Defense;
+    public int Defense;
     public MonsterDropItemData[] DropItems;
 
     public MonsterStats()
     {
-        HP = 10f;
+        HP = 10;
         Damage = 10;
-        Defense = 5f;
+        Defense = 0;
     }
 }
 public class Monster : MonoBehaviour, IDamageable
