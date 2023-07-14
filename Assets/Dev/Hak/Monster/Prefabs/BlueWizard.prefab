@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2125647579610919682}
   - component: {fileID: -4155775362752117682}
   m_Layer: 0
-  m_Name: Monster
+  m_Name: BlueWizard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
