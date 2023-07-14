@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class MonsterBlueWizard : Monster
 {
+    public MonsterBlueWizard()
+    {
+        Stats.DropItems = new []
+        {
+            new MonsterDropItemData(1, ""),
+        };
+    }
+
     private void Start()
     {
         NextPattern = PatternAttack;

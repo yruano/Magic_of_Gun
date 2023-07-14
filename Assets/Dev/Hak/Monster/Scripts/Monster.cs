@@ -12,6 +12,7 @@ public class MonsterStats
     public float Damage;
     [SerializeField]
     public float Defense;
+    public MonsterDropItemData[] DropItems;
 
     public MonsterStats()
     {
