@@ -53,7 +53,7 @@ public class Player : MonoBehaviour, IDamageable
         }
 
         Debug.Log(Stats.HP);
-        if (Stats.HP == 0)
+        if (Stats.HP <= 0)
         {
             Destroy(gameObject);
         }

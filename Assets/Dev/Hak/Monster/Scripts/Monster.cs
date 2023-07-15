@@ -57,7 +57,7 @@ public class Monster : MonoBehaviour, IDamageable
             }
         }
 
-        if (Stats.HP == 0)
+        if (Stats.HP <= 0)
         {
             Destroy(gameObject);
         }
