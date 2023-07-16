@@ -10,12 +10,18 @@ public class PlayerStats
     [SerializeField]
     public int HP;
     [SerializeField]
+    public int MaxMP;
+    [SerializeField]
+    public int MP;
+    [SerializeField]
     public int Shield;
 
     public PlayerStats()
     {
         MaxHP = 100;
         HP = 100;
+        MaxMP = 100;
+        MP = 100;
         Shield = 0;
     }
 }
