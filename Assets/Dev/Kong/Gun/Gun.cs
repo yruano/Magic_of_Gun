@@ -18,8 +18,27 @@ public class Gun : MonoBehaviour
     public bool Focus = false;
     //기능고장 확률, 0~1
     public float JamChance = 0;
+    //조준하고 있는 대상을 저장함
+    public GameObject Target = null;
 
-    //총알 구성품 부족 오류
+    //이벤트 구독 연결
+    public EventBus eventBus = null;
+
+    //초기화
+    private void Awake()
+    {
+        //이벤트 버스 구독준비
+        if(eventBus == null)
+        {
+            //이벤트 연결
+            eventBus = FindObjectOfType<EventBus>();
+        }
+
+        //목표 지정 이벤트 구독
+        eventBus.ClickMonster += GetTarget;
+    }
+
+    //총알 구성품 부족 오류 정의
     public class LackOfAssemblyException : System.Exception
     {
         public LackOfAssemblyException(Warhead wh, CartridgeCase cc)
@@ -92,5 +111,11 @@ public class Gun : MonoBehaviour
             //null반환으로 연결되었다고 표시
             return null;
         }
+    }
+
+    //목표 선택 이벤트 리스너
+    public void GetTarget(GameObject target)
+    {
+        this.Target = target;
     }
 }
