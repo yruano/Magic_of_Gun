@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class MonsterBlueWizard : Monster
 {
+    public GameObject P_Bullet;
     private string[] Patterns = new string[3];
     public MonsterBlueWizard()
     {
@@ -42,7 +43,9 @@ public class MonsterBlueWizard : Monster
 
     private IEnumerator PatternAttack()
     {
-        Debug.Log("공격");
+        var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
+        bullet.GetComponent<MonsterMagic>().Damage = Stats.Damage;
+
         _patternDone = true;
         RandomPattern();
         yield return null;
