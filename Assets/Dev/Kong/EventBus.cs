@@ -65,7 +65,12 @@ public class EventBus : MonoBehaviour
     //방아쇠 클릭 이벤트 발생 중개
     public void PublishClickTrigerEvent(int info)
     {
-        ClickTriger?.Invoke(info);
+        //목표 선택 상태라면
+        if(State == SELECT_TARGET)
+        {
+            //방아쇠 이벤트 발생
+            ClickTriger?.Invoke(info);
+        }
     }
 
     //취소 이벤트 발생및 관련 상태 감지

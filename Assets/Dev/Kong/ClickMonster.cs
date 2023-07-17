@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-//클릭시 호출, 엄청 단순한 구조라 상속할거까진 아닌거 같아서 참고용 코드로 남김.  
+//클릭시 호출
 public class ClickMonster : MonoBehaviour
 {
     //이벤트 구독 위해

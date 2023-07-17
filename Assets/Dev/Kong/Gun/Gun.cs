@@ -36,6 +36,9 @@ public class Gun : MonoBehaviour
 
         //목표 지정 이벤트 구독
         eventBus.ClickMonster += GetTarget;
+
+        //방아쇠 이벤트 구독
+        eventBus.ClickTriger += HitTarget;
     }
 
     //총알 구성품 부족 오류 정의
@@ -64,6 +67,8 @@ public class Gun : MonoBehaviour
         }
 
         //다른 오류가 없다면
+        //로그에 남기고
+        Debug.Log($"fired: {gameObject.name}");
         //탄창의 제일 위에있는 총알을 골라
         Bullet ret = Magazines[0];
         //탄창에서 제거하고
@@ -117,5 +122,25 @@ public class Gun : MonoBehaviour
     public void GetTarget(GameObject target)
     {
         this.Target = target;
+    }
+
+    //방아쇠 이벤트 리스너
+    public void HitTarget(int info)
+    {
+        //fire함수를 통해 탄창관련 처리 후 하나 받아옴
+        Bullet damage = Fire();
+        //탄창이 비어 받아온게 없다면
+        if(damage == null)
+        {
+            Debug.Log($"out of ammo: {gameObject.name}");
+            //탄창 비었다는 이벤트 발생
+        }
+        //비지 않았다면
+        else
+        {
+            Debug.Log($"{gameObject.name}: gun shoted, target: {Target.name}");
+            //목표에게 데미지 전달
+            Target.GetComponent<Monster>().Damage(damage.Damage);
+        }
     }
 }
