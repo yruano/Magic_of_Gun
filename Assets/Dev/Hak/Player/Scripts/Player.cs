@@ -30,6 +30,8 @@ public class Player : MonoBehaviour, IDamageable
 {
     public Rigidbody2D Rd2d;
     public PlayerStats Stats;
+    public PlayerItemTable ItemTable = new();
+    public Item TestItem;
 
     private void Awake()
     {
@@ -62,6 +64,26 @@ public class Player : MonoBehaviour, IDamageable
         if (Stats.HP <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Item"))
+        {
+            TestItem = ItemTable.AddItem(0);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            TestItem = ItemTable.AddItem(0);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ItemTable.RemoveItem(TestItem.ComputeHash());
         }
     }
 }
