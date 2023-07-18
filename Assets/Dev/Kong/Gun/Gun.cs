@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -57,13 +58,6 @@ public class Gun : MonoBehaviour
         {
             //비었다는 의미로 null 반환
             return null;
-        }
-
-        //쏠 총알의 구성품이 모자라다면 
-        if (Magazines[0].head == null || Magazines[0].cartridge == null)
-        {
-            //예외 던짐, 하나라도 비어있으면 총알생성/전달에 매우 큰 문제가 생긴거임, 진행하면 안됨.
-            throw new LackOfAssemblyException(Magazines[0].head, Magazines[0].cartridge);
         }
 
         //다른 오류가 없다면

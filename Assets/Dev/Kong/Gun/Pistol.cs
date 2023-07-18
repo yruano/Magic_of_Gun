@@ -6,7 +6,7 @@ public class Pistol : Gun
 {
     public Pistol()
     {
-        //탄창 크기, m1911기준으로 7발(내가 좋아하는 총임)
+        //탄창 크기, 7발(그림 모양 맞춤)
         MaxMagazine = 7;
         //턴당 발사 횟수는 탄창크기만큼
         BulletPerTrun = MaxMagazine;
@@ -16,5 +16,9 @@ public class Pistol : Gun
         Focus = false;
         //고장확률은 아직 미정이니 0
         JamChance = 0;
+        //!!데이터 확인용 임시!!
+        SampleBullet sd = new SampleBullet();
+        Magazines.Add(sd);
+        
     }
 }

@@ -2,17 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SampleWarhead : MonoBehaviour
+//데이터 이동을 확인하기위한 예시 스크립트
+public class SampleWarhead : Warhead
 {
-    // Start is called before the first frame update
-    void Start()
+    public SampleWarhead()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Damage = 10;
+        type = 0;
+        ID = 0;
     }
 }

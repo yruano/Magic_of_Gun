@@ -9,8 +9,12 @@ public class Warhead : MonoBehaviour
     //탄두 데미지
     public int Damage = 0;
     //탄두가 가지는 버프 제거/디버프 등등의 id를 담을 곳
-    List<int> Buff = null;
+    public List<int> Buff = null;
     //타입
-    int type = -1;
-    int ID = -1;
+    public int type = -1;
+    public int ID = -1;
+    //탄두가 보여져야할 색깔, #RGB, 기본은 황금색 = #ffd700
+    Color color = new Color(0xFF / 255f, 
+                            0xD7 / 255f, 
+                            0x00 / 255f);
 }
