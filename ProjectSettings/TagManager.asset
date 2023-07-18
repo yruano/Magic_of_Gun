@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Magazine
+    uniqueID: 3991165793
+    locked: 0
+  - name: WarHead
+    uniqueID: 2120604551
+    locked: 0
+  - name: CartridgeCase
+    uniqueID: 2608332187
+    locked: 0

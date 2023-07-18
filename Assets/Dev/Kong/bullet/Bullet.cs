@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,8 +12,12 @@ public class Bullet : MonoBehaviour
     public CartridgeCase cartridge = null;
     public int Damage = 0;
 
-
-    public Bullet (Warhead head,  CartridgeCase cartridge)
+    public void Start()
+    { 
+        head = null;
+        cartridge = null;
+    }
+    public void InsertData (Warhead head,  CartridgeCase cartridge)
     {
         this.head = head;
         this.cartridge = cartridge;
