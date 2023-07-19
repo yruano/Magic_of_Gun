@@ -69,7 +69,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Item"))
+        if (other.gameObject.CompareTag("Item"))
         {
             TestItem = ItemTable.AddItem(0);
         }
