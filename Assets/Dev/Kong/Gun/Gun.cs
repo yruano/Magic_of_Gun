@@ -13,6 +13,8 @@ public class Gun : MonoBehaviour
     public int MaxMagazine = -1;
     //턴당 발사 가능 수
     public int BulletPerTrun = -1;
+    //발사한 횟수
+    public int FiredCount = 0;
     //현재 총에 장착된 탄창
     public List<Bullet> Magazines = new List<Bullet>();
     //집중 사용 여부
@@ -40,6 +42,9 @@ public class Gun : MonoBehaviour
 
         //방아쇠 이벤트 구독
         eventBus.ClickTriger += HitTarget;
+
+        //턴 시작 이벤트 구독
+        eventBus.PlayerTurn += PlayerTurn;
     }
 
     //총알 구성품 부족 오류 정의
@@ -67,6 +72,10 @@ public class Gun : MonoBehaviour
         Bullet ret = Magazines[0];
         //탄창에서 제거하고
         Magazines.RemoveAt(0);
+
+        //발사횟수 증가하고
+        FiredCount++;
+
         //객체 반환
         return ret;
     }
@@ -134,7 +143,14 @@ public class Gun : MonoBehaviour
         {
             Debug.Log($"{gameObject.name}: gun shoted, target: {Target.name}");
             //목표에게 데미지 전달
-            Target.GetComponent<Monster>().Damage(damage.Damage);
+            Target.GetComponent<IDamageable>().Damage(damage.Damage);
         }
+    }
+
+    //플레이어 턴 시작 이벤트 리스너
+    public void PlayerTurn()
+    {
+        //발사횟수 초기화
+        FiredCount = 0;
     }
 }

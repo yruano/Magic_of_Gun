@@ -6,14 +6,18 @@ using UnityEngine;
 //이벤트와 상태를 중계합니다.
 public class EventBus : MonoBehaviour
 {
-    //행동 취소후 중립상태
+    //중립상태, 행동 취소시 진입
     public event Action<int> Cancle;
-    //중립 상태에서 에임 표식 클릭, 조준 중 상태로
+    //에임 표식 클릭,중립 상태일 시 조준 중 상태로
     public event Action<int> ClickAim;
-    //조준 중 상태에서 몬스터 클릭, 목표 선택 상태가 됨
+    //몬스터 클릭, 조준 중 상태일 시 목표 선택 상태가 됨
     public event Action<GameObject> ClickMonster;
-    //목표 선택 상태에서 방아쇠 클릭, 사격 진행
+    //방아쇠 클릭, 목표 선택 상태일 시사격 진행
     public event Action<int> ClickTriger;
+    //준비중인 탄창 클릭, 사격하지 않았을 때 장전됨
+    public event Action<int> ClickReadyMagazine;
+    //플레이어 턴이 돌아왔으면 발생됨
+    public event Action PlayerTurn;
 
     //현재 상태, 모든 리스너는 state를 수정해야함.
     public int State = 0;
@@ -23,6 +27,13 @@ public class EventBus : MonoBehaviour
     public static int AIMING = 1;
     //목표 선택 상태 
     public static int SELECT_TARGET = 2;
+    //장전중 상태
+    public static int REALOAD = 3;
+
+    //사격 여부
+    public bool fired = false;
+    //장전 여부
+    public bool reloaded = false;
 
     //취소 이벤트 발생 중개
     public void PublishCancleEvent(int info)
@@ -34,8 +45,8 @@ public class EventBus : MonoBehaviour
     public bool PublishClickAimEvent(int info)
     {
         //상태 확인, switch-case문은 static변수를 사용할 수 없으므로 if-else문으로 작성
-        //중립 상태이거나 목표 지정 상태일 시
-        if (State == NEUTRAL || State == SELECT_TARGET)
+        //장전하지 않았고, 중립 상태이거나 목표 지정 상태일 시
+        if (reloaded == false && State == NEUTRAL || State == SELECT_TARGET)
         {
             //조준 중 상태로 변경
             State = AIMING;
@@ -70,6 +81,23 @@ public class EventBus : MonoBehaviour
         {
             //방아쇠 이벤트 발생
             ClickTriger?.Invoke(info);
+            //사격했다고 기록
+            fired = true;
+        }
+    }
+
+    //탄창 클릭 이벤트 발생 중개
+    public void PublishCilckReadyMagazineEvent(int info)
+    {
+        //사격하지 않았으면
+        if (!fired)
+        {
+            //장전중 상태로 변경
+            State = REALOAD;
+            //탄창클릭 이벤트 발생
+            ClickReadyMagazine?.Invoke(info);
+            //장전했다고 기록
+            reloaded = true;
         }
     }
 
@@ -92,4 +120,21 @@ public class EventBus : MonoBehaviour
             }
         }
     }
+
+    //PlayerTurn 발생시 초기화 하기 위해 이벤트 구독
+    public void Start()
+    {
+        PlayerTurn += Initial;
+    }
+
+    //초기화, 중립이벤트 발생시키고 아무것도 하지않은 상태로 수정
+    public void Initial()
+    {
+        State = 0;
+        fired = false;
+        reloaded = false;
+        //초기화를 하기위해 중립상태 이벤트 발생, 자동 호출임을 나타내기 위해 음수로.
+        Cancle?.Invoke(-1);
+    }
+
 }

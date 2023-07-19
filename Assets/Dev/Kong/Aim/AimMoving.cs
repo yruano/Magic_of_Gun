@@ -45,6 +45,12 @@ public class AimMoving : MonoBehaviour
 
         //목표 선택 상태 이벤트를 구독함
         eventBus.ClickMonster += ToMonster;
+
+        //탄창 클릭 이벤트를 구독함
+        eventBus.ClickReadyMagazine += Hide;
+
+        //플레이어턴 이벤트를 구독함
+        eventBus.PlayerTurn += Show;
     }
 
     //클릭 발생시 이벤트 발생 요청. 적당한 상태라면 상태 전환
@@ -60,6 +66,11 @@ public class AimMoving : MonoBehaviour
     //중립 상태때 호출되어야함, 총구 위치로 이동!!(현재 위치는 임시지정임)!!
     public void ToGun(int info)
     {
+        //이번턴에 장전했다면
+        if(eventBus.reloaded == true) 
+            //아무것도 하지않고 종료
+            return;
+
         //다시 에임이 클릭될수 있도록 colider를 켬
         GetComponent<CircleCollider2D>().enabled = true;
         //총의 위치를 찾아
@@ -84,5 +95,21 @@ public class AimMoving : MonoBehaviour
         GetComponent<CircleCollider2D>().enabled = true;
         //몬스터의 정 가운데 위치로 이동
         transform.position = target.transform.position;
+    }
+
+    //탄창 선택 이벤트 발생시 호출되어야함, 오브젝트가 숨겨지고, 클릭 이벤트를 받지 못하게만듬
+    public void Hide(int info)
+    {
+        //오브젝트가 숨겨짐,    SpriteRenderer는 Renderer를 상속받음
+        gameObject.GetComponent<Renderer>().enabled = false;
+        //클릭 못하게됨         CircleCollider2D 는 Collider2D를 상속받음
+        gameObject.GetComponent<Collider2D>().enabled = false;
+    }
+
+    //플레이어 턴 이벤트 발생시 호출되어야함, 숨겨진 오브젝트가 드러나야함
+    public void Show()
+    {
+        //오브젝트가 다시 드러남SpriteRenderer는 Renderer를 상속받음
+        gameObject.GetComponent<Renderer>().enabled = true;
     }
 }
