@@ -6,7 +6,6 @@ using UnityEngine;
 public class MonsterBlueWizard : Monster
 {
     public GameObject P_Bullet;
-    private string[] Patterns = new string[3];
     public MonsterBlueWizard()
     {
         Stats.DropItems = new[]
@@ -17,28 +16,17 @@ public class MonsterBlueWizard : Monster
 
     private void Start()
     {
-        Patterns[0] = "Attack";
-        Patterns[1] = "DefenseBuff";
-        Patterns[2] = "DamageBuff";
+        Patterns.Add(PatternAttack);
+        Patterns.Add(PatternDefenseBuff);
+        Patterns.Add(PatternDamageBuff);
         RandomPattern();
     }
 
     private void RandomPattern()
     {
-        Patterns = Patterns.OrderBy(x => Random.Range(0, Patterns.Length)).ToArray();
+        var Pattern = Patterns.OrderBy(x => Random.Range(0, Patterns.Count)).ToArray();
 
-        if (Patterns[0] is "Attack")
-        {
-            NextPattern = PatternAttack;
-        }
-        else if (Patterns[0] is "DefenseBuff")
-        {
-            NextPattern = PatternDefenseBuff;
-        }
-        else if (Patterns[0] is "DamageBuff")
-        {
-            NextPattern = PatternDamageBuff;
-        }
+        NextPattern = Pattern[0];
     }
 
     private IEnumerator PatternAttack()
