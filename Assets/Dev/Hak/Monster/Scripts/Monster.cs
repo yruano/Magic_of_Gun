@@ -26,7 +26,7 @@ public class Monster : MonoBehaviour, IDamageable
     protected Func<IEnumerator> NextPattern;
     protected Coroutine CurrentPattern = null;
     protected bool _patternDone = true;
-    public List<Func<IEnumerator>> Patterns = new List<Func<IEnumerator>>();
+    public List<Func<IEnumerator>> Patterns = new();
 
     public MonsterStats Stats = new();
 
