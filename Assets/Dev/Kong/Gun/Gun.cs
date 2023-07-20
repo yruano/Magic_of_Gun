@@ -15,8 +15,12 @@ public class Gun : MonoBehaviour
     public int BulletPerTrun = -1;
     //발사한 횟수
     public int FiredCount = 0;
+
     //현재 총에 장착된 탄창
     public List<Bullet> Magazines = new List<Bullet>();
+    //탄창을 클릭했을 때 정보를 받아오기 위한 변수
+    public GameObject nextMagazine = null;
+
     //집중 사용 여부
     public bool Focus = false;
     //기능고장 확률, 0~1
@@ -45,6 +49,12 @@ public class Gun : MonoBehaviour
 
         //턴 시작 이벤트 구독
         eventBus.PlayerTurn += PlayerTurn;
+
+        //탄창 선택 이벤트 구독
+        eventBus.ClickMagazine += NewMagazine;
+
+        //탄창 교체 확정 이벤트 구독
+        eventBus.ClickLoadConfirmed += Reload;
     }
 
     //총알 구성품 부족 오류 정의
@@ -80,6 +90,56 @@ public class Gun : MonoBehaviour
         return ret;
     }
     
+    //목표 선택 이벤트 리스너
+    public void GetTarget(GameObject target)
+    {
+        this.Target = target;
+    }
+
+    //방아쇠 이벤트 리스너
+    public void HitTarget(int info)
+    {
+        //fire함수를 통해 탄창관련 처리 후 하나 받아옴
+        Bullet damage = Fire();
+        //탄창이 비어 받아온게 없다면
+        if(damage == null)
+        {
+            Debug.Log($"out of ammo: {gameObject.name}");
+            //탄창 비었다는 이벤트 발생
+        }
+        //비지 않았다면
+        else
+        {
+            Debug.Log($"{gameObject.name}: gun shoted, target: {Target.name}");
+            //목표에게 데미지 전달
+            Target.GetComponent<IDamageable>().Damage(damage.Damage);
+        }
+    }
+
+    //플레이어 턴 시작 이벤트 리스너
+    public void PlayerTurn()
+    {
+        //발사횟수 초기화
+        FiredCount = 0;
+    }
+
+    //탄창 선택 이벤트 리스너
+    public void NewMagazine(GameObject newMagazine)
+    {
+        //새로운거로 교체
+        nextMagazine = newMagazine;
+    }
+
+    //탄창 교체 확정 이벤트 리스너
+    public void Reload(int info)
+    {
+        //기존 탄창 데이터 버림
+        Magazines.Clear();
+        //새로운 데이터를 넣음
+        Magazines.AddRange(nextMagazine.GetComponent<Magazine>().bullets);
+    }
+
+    /* 탄창 교체 감이 안잡혔을 때 썼던 함수
     //탄창 교체
     public List<Bullet> Reload(List<Bullet> NewMagazine)
     {
@@ -120,37 +180,5 @@ public class Gun : MonoBehaviour
             return null;
         }
     }
-
-    //목표 선택 이벤트 리스너
-    public void GetTarget(GameObject target)
-    {
-        this.Target = target;
-    }
-
-    //방아쇠 이벤트 리스너
-    public void HitTarget(int info)
-    {
-        //fire함수를 통해 탄창관련 처리 후 하나 받아옴
-        Bullet damage = Fire();
-        //탄창이 비어 받아온게 없다면
-        if(damage == null)
-        {
-            Debug.Log($"out of ammo: {gameObject.name}");
-            //탄창 비었다는 이벤트 발생
-        }
-        //비지 않았다면
-        else
-        {
-            Debug.Log($"{gameObject.name}: gun shoted, target: {Target.name}");
-            //목표에게 데미지 전달
-            Target.GetComponent<IDamageable>().Damage(damage.Damage);
-        }
-    }
-
-    //플레이어 턴 시작 이벤트 리스너
-    public void PlayerTurn()
-    {
-        //발사횟수 초기화
-        FiredCount = 0;
-    }
+    */
 }

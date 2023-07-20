@@ -46,8 +46,8 @@ public class AimMoving : MonoBehaviour
         //목표 선택 상태 이벤트를 구독함
         eventBus.ClickMonster += ToMonster;
 
-        //탄창 클릭 이벤트를 구독함
-        eventBus.ClickReadyMagazine += Hide;
+        //탄창 교체 확정 이벤트를 구독함
+        eventBus.ClickLoadConfirmed += Hide;
 
         //플레이어턴 이벤트를 구독함
         eventBus.PlayerTurn += Show;
@@ -97,7 +97,7 @@ public class AimMoving : MonoBehaviour
         transform.position = target.transform.position;
     }
 
-    //탄창 선택 이벤트 발생시 호출되어야함, 오브젝트가 숨겨지고, 클릭 이벤트를 받지 못하게만듬
+    //탄창 교체 확정 이벤트 발생시 호출되어야함, 오브젝트가 숨겨지고, 클릭 이벤트를 받지 못하게만듬
     public void Hide(int info)
     {
         //오브젝트가 숨겨짐,    SpriteRenderer는 Renderer를 상속받음

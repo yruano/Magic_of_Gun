@@ -14,10 +14,11 @@ public class Magazine : MonoBehaviour
 {
     //탄창역할을 위해 bullet리스트를 담는 무언가
     [SerializeField]
-    List<Bullet> bullets = new List<Bullet>();
+    public List<Bullet> bullets = new List<Bullet>();
 
     //이벤트 구독을 위해 연결
     public EventBus eventBus = null;
+
 
     public void Start()
     {
@@ -33,6 +34,7 @@ public class Magazine : MonoBehaviour
 
         //플레이어 턴 이벤트 구독
         eventBus.PlayerTurn += Show;
+
     }
 
     //방아쇠 클릭 이벤트 발생시 호출되어야함, 오브젝트가 숨겨지고, 클릭 이벤트를 받지 못하게만듬
@@ -44,13 +46,19 @@ public class Magazine : MonoBehaviour
         gameObject.GetComponent<Collider2D>().enabled = false;
     }
 
-    //플레이어 턴 이벤트 발생시 호출되어야함, 숨겨진 오브젝트가 드러나야함
+    //플레이어 턴 이벤트 발생시 호출되어야함, 숨겨진 오브젝트가 드러나야함, 클릭 이벤트를 받아야함
     public void Show()
     {
         //오브젝트가 다시 드러남SpriteRenderer는 Renderer를 상속받음
         gameObject.GetComponent<Renderer>().enabled = true;
         //클릭 가능하게됨       ~~Collider2D 는 Collider2D를 상속받음
         gameObject.GetComponent<Collider2D>().enabled = true;
+    }
+
+    //클릭되었을 때 이벤트를 발생시켜 정보를 보내야함.
+    public void OnMouseDown() 
+    {
+        eventBus.PublishClickMagazineEvent(gameObject);
     }
 
 

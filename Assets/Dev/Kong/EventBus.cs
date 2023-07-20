@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //이벤트와 상태를 중계합니다.
 public class EventBus : MonoBehaviour
@@ -12,10 +13,12 @@ public class EventBus : MonoBehaviour
     public event Action<int> ClickAim;
     //몬스터 클릭, 조준 중 상태일 시 목표 선택 상태가 됨
     public event Action<GameObject> ClickMonster;
-    //방아쇠 클릭, 목표 선택 상태일 시사격 진행
+    //방아쇠 클릭, 목표 선택 상태일 시 사격 진행
     public event Action<int> ClickTriger;
-    //준비중인 탄창 클릭, 사격하지 않았을 때 장전됨
-    public event Action<int> ClickReadyMagazine;
+    //준비중인 탄창 클릭, 사격하지 않았고, 중립상태 일 때 전환가능
+    public event Action<GameObject> ClickMagazine;
+    //장전 확정, 사격할 수 없게됨
+    public event Action<int> ClickLoadConfirmed;
     //플레이어 턴이 돌아왔으면 발생됨
     public event Action PlayerTurn;
 
@@ -27,8 +30,8 @@ public class EventBus : MonoBehaviour
     public static int AIMING = 1;
     //목표 선택 상태 
     public static int SELECT_TARGET = 2;
-    //장전중 상태
-    public static int REALOAD = 3;
+    //탄창 선택 상태
+    public static int SELECT_MAGAZINE = 3;
 
     //사격 여부
     public bool fired = false;
@@ -86,16 +89,25 @@ public class EventBus : MonoBehaviour
         }
     }
 
-    //탄창 클릭 이벤트 발생 중개
-    public void PublishCilckReadyMagazineEvent(int info)
+    //탄창 선택 이벤트 발생 중개, 무슨 탄창인지 정보 전달 필요
+    public void PublishClickMagazineEvent(GameObject info)
     {
-        //사격하지 않았으면
-        if (!fired)
+        //중립 상태이고, 사격한적이 없다면
+        if(State == NEUTRAL && !fired)
         {
-            //장전중 상태로 변경
-            State = REALOAD;
+            //탄창 선택 이벤트 발생
+            ClickMagazine?.Invoke(info);
+        }
+    }
+
+    //탄창 교체 확정 이벤트 발생 중개
+    public void PublishClickLoadConfirmedEvent(int info)
+    {
+        //탄창 선택 상태일 때
+        if (State == SELECT_MAGAZINE)
+        {
             //탄창클릭 이벤트 발생
-            ClickReadyMagazine?.Invoke(info);
+            ClickLoadConfirmed?.Invoke(info);
             //장전했다고 기록
             reloaded = true;
         }
