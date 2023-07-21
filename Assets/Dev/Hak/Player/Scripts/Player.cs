@@ -15,6 +15,8 @@ public class PlayerStats
     public int MP;
     [SerializeField]
     public int Shield;
+    [SerializeField]
+    public int Shield_Increment;
 
     public PlayerStats()
     {
@@ -23,6 +25,7 @@ public class PlayerStats
         MaxMP = 100;
         MP = 100;
         Shield = 0;
+        Shield_Increment = 10;
     }
 }
 
@@ -75,6 +78,12 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    private void Obscuration()
+    {
+        Stats.Shield += Stats.Shield_Increment;
+        Debug.Log(Stats.Shield);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.X))
@@ -84,6 +93,10 @@ public class Player : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.C))
         {
             ItemTable.RemoveItem(TestItem.ComputeHash());
+        }
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Obscuration();
         }
     }
 }
