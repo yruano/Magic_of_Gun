@@ -95,6 +95,8 @@ public class EventBus : MonoBehaviour
         //중립 상태이고, 사격한적이 없다면
         if(State == NEUTRAL && !fired)
         {
+            //상태 탄창 선택 상태로 변결
+            State = SELECT_MAGAZINE;
             //탄창 선택 이벤트 발생
             ClickMagazine?.Invoke(info);
         }
@@ -120,7 +122,7 @@ public class EventBus : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             // 마우스 오른쪽 버튼이 클릭되었다고 일단 로그에 보냄
-            Debug.Log("Right button clicked");
+            Debug.Log("Right button clicked.");
             //중립 상태가 아니라면
             if(State != NEUTRAL)
             {
@@ -131,6 +133,15 @@ public class EventBus : MonoBehaviour
                 
             }
         }
+        //!!임시, 다음턴 이벤트 굴리는 용도로 엔터 감지!!
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log("enter key entered.");
+            //플레이어 턴 이벤트 발생
+            PlayerTurn?.Invoke();
+        }
+        
+
     }
 
     //PlayerTurn 발생시 초기화 하기 위해 이벤트 구독

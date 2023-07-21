@@ -16,9 +16,6 @@ public class Pistol : Gun
         Focus = false;
         //고장확률은 아직 미정이니 0
         JamChance = 0;
-        //!!데이터 확인용 임시!!
-        SampleBullet sd = new SampleBullet();
-        Magazines.Add(sd);
         
     }
 }
