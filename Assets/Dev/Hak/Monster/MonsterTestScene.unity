@@ -289,10 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24cbb754eac5c4d4ab1d69e1e7245c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  P_SpwanPatten:
-  - {fileID: 4882252061448563374, guid: 911db959a13ba5842a2a824f55ead08d, type: 3}
-  - {fileID: 2715648818538986089, guid: 144bf969be30de54c82238bf0d9753d6, type: 3}
-  - {fileID: 2217240411903399871, guid: 5dfab250332ff8e488dca2fec515fa85, type: 3}
+  P_SpwanPattern: []
 --- !u!4 &1191475272
 Transform:
   m_ObjectHideFlags: 0

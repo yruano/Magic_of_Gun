@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2208703946170554947}
   - component: {fileID: 475248581196009193}
   m_Layer: 0
-  m_Name: MonsterSpawnPatten1
+  m_Name: MonsterSpawnPattern1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 2532911383973123650}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &475248581196009193
 MonoBehaviour:
