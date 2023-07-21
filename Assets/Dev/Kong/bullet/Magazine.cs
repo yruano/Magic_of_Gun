@@ -58,6 +58,8 @@ public class Magazine : MonoBehaviour
     //클릭되었을 때 이벤트를 발생시켜 정보를 보내야함.
     public void OnMouseDown() 
     {
+        //로그발생
+        Debug.Log($"Magazine Clicked: {gameObject.name}");
         eventBus.PublishClickMagazineEvent(gameObject);
     }
 

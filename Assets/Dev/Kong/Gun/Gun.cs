@@ -57,14 +57,6 @@ public class Gun : MonoBehaviour
         eventBus.ClickLoadConfirmed += Reload;
     }
 
-    //총알 구성품 부족 오류 정의
-    public class LackOfAssemblyException : System.Exception
-    {
-        public LackOfAssemblyException(Warhead wh, CartridgeCase cc)
-        {
-        }
-    }
-
     //탄창에서 가장 위에있는 총알 반환. 계산은 총알 정보 받아서 알아서함(버프 정보때문에 이래야함)
     public Bullet Fire()
     {

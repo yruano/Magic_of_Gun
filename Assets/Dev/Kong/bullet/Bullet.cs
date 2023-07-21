@@ -5,23 +5,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField]
-    //탄두 데이터
-    public Warhead head = null;
-    //탄피 데이터
-    public CartridgeCase cartridge = null;
+    //데미지 데이터
     public int Damage = 0;
+    //탄피색깔
+    Color cartridgeColor = new Color(0xFF / 255f,
+                                     0xAE / 255f,
+                                     0x00 / 255f);
+    //탄두 색깔
+    Color warHeadColor = new Color(0xFF / 255f,
+                                   0xD7 / 255f,
+                                   0x00 / 255f);
 
-    public void Start()
-    { 
-        head = null;
-        cartridge = null;
-    }
-    public void InsertData (Warhead head,  CartridgeCase cartridge)
-    {
-        this.head = head;
-        this.cartridge = cartridge;
-        Damage = head.Damage + cartridge.Damage;
-    }
-
+    //어쩌구 저쩌구 데이터.. 아마 디버프가 들어올것
 }
