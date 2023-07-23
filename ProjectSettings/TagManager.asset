@@ -7,6 +7,9 @@ TagManager:
   - Enemy
   - Gun
   - Item
+  - CartridgeCase
+  - WarHead
+  - Bullet
   layers:
   - Default
   - TransparentFX

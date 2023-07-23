@@ -11,7 +11,7 @@ public class Pistol : Gun
         //턴당 발사 횟수는 탄창크기만큼
         BulletPerTrun = MaxMagazine;
         //탄창 초기화
-        Magazines.Clear();
+        Magazine.Clear();
         //집중 미사용
         Focus = false;
         //고장확률은 아직 미정이니 0
