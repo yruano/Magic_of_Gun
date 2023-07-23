@@ -16,7 +16,9 @@ public class MonsterBlueWizard : Monster
 
     private void Start()
     {
+        Weights = new List<int> { 5, 4, 3, 2 };
         Patterns.Add(PatternAttack);
+        Patterns.Add(PatternRest);
         Patterns.Add(PatternDefenseBuff);
         Patterns.Add(PatternDamageBuff);
         RandomPattern();
@@ -24,9 +26,10 @@ public class MonsterBlueWizard : Monster
 
     private void RandomPattern()
     {
-        var Pattern = Patterns.OrderBy(x => Random.Range(0, Patterns.Count)).ToArray();
+        WeightedRandom weightedRandom = new WeightedRandom(Weights);
+        int randomIndex = weightedRandom.GetRandomIndex();
 
-        NextPattern = Pattern[0];
+        NextPattern = Patterns[randomIndex];
     }
 
     private IEnumerator PatternAttack()
@@ -52,6 +55,14 @@ public class MonsterBlueWizard : Monster
     {
         Debug.Log("대미지 강화");
         Stats.Damage += 5;
+        _patternDone = true;
+        RandomPattern();
+        yield return null;
+    }
+
+    public IEnumerator PatternRest()
+    {
+        Debug.Log("휴식");
         _patternDone = true;
         RandomPattern();
         yield return null;
