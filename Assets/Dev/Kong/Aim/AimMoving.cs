@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //에임의 상태 전환과 그에 따른 움직임을 주관
-public class AimMoving : MonoBehaviour, ISpriteToggleable
+public class AimMoving : MonoBehaviour
 {
     [SerializeField]
     //이벤트 구독 연결

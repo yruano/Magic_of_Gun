@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor.PackageManager;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.UI;
 //총들이 공통적으로 갖는 데이터와 함수이름 정의
@@ -16,8 +16,13 @@ public class Gun : MonoBehaviour
     //발사한 횟수
     public int FiredCount = 0;
 
-    //현재 총에 장착된 탄창
-    public List<Bullet> Magazines = new List<Bullet>();
+    [SerializeField]
+    //총알 스크립트를 만들기 위해 참조할 프리팹
+    GameObject prefab;
+    //현재 총에 들어온 총알 정보
+    public List<Bullet> Magazine = new List<Bullet>();
+    //총에 어떤 총알이 있는지 플레이어에게 보여주기 위한 오브젝트 리스트
+    public List<GameObject> bulletSprite = new List<GameObject>();
     //탄창을 클릭했을 때 정보를 받아오기 위한 변수
     public GameObject nextMagazine = null;
 
@@ -61,7 +66,7 @@ public class Gun : MonoBehaviour
     public Bullet Fire()
     {
         //탄창이 비었다면
-        if(Magazines.Count <= 0) 
+        if(Magazine.Count <= 0) 
         {
             //비었다는 의미로 null 반환
             return null;
@@ -71,12 +76,15 @@ public class Gun : MonoBehaviour
         //로그에 남기고
         Debug.Log($"fired: {gameObject.name}");
         //탄창의 제일 위에있는 총알을 골라
-        Bullet ret = Magazines[0];
+        Bullet ret = Magazine[0];
         //탄창에서 제거하고
-        Magazines.RemoveAt(0);
+        Magazine.RemoveAt(0);
 
         //발사횟수 증가하고
         FiredCount++;
+
+        //총알 스프라이트 위치 조정하고
+        MoveBulletSptite();
 
         //객체 반환
         return ret;
@@ -126,9 +134,36 @@ public class Gun : MonoBehaviour
     public void Reload(int info)
     {
         //기존 탄창 데이터 버림
-        Magazines.Clear();
+        Magazine.Clear();
         //새로운 데이터를 넣음
-        Magazines.AddRange(nextMagazine.GetComponent<Magazine>().bullets);
+        Magazine.AddRange(nextMagazine.GetComponent<Magazine>().bullets);
+    }
+
+    //잔탄을 보여주기 위해 총에 들어가있는 총알 데이터를 기반으로 총알 스프라이트 생성
+    public void MakeBulletSprite()
+    {
+        //기존 리스트 비움
+        bulletSprite.Clear();
+        //탄창 정보따라 스프라이트-오브젝트를 만듬
+        foreach (var bullet in Magazine)
+        {
+            //먼저 프리팹을 참조해 오브젝를 만듬
+            bulletSprite.Add(Instantiate(prefab));
+            //그 후 자식 오브젝트로 만듬
+            bulletSprite[bulletSprite.Count - 1].transform.SetParent(transform);
+        }
+        //위치조정
+        MoveBulletSptite();
+    }
+
+    //총알 스프라이트의 위치를 조정함.
+    public void MoveBulletSptite()
+    {
+        for (int i = 0; i < Magazine.Count; i++)
+        {
+            //좌표 설정
+            Magazine[i].gameObject.transform.localPosition = new Vector3(0f, 0.3884358f - (i * 0.1387271f), 0f);
+        }
     }
 
     /* 탄창 교체 감이 안잡혔을 때 썼던 함수
