@@ -15,7 +15,7 @@ public class MonsterSpawn : MonoBehaviour
     {
         for (int i = 0; i < Pos.Count; i++)
         {
-            Instantiate(P_Monster[0], Pos[i].position, Quaternion.identity);
+            Instantiate(P_Monster[1], Pos[i].position, Quaternion.identity);
         }
     }
 }
