@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   P_Monster:
   - {fileID: 363663480162597436, guid: 19a227eb325f7654d9e7a3e665991836, type: 3}
+  - {fileID: 2831289341180057623, guid: cad21b6a73a75254f8a3610d234b0664, type: 3}
   Pos:
   - {fileID: 2532911383973123650}
 --- !u!1 &8302600041113001225

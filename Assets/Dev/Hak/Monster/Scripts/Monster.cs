@@ -12,11 +12,13 @@ public class MonsterStats
     public int Damage;
     [SerializeField]
     public int Defense;
+    public int MaxHP;
     public MonsterDropItemData[] DropItems;
 
     public MonsterStats()
     {
-        HP = 10;
+        MaxHP = 10;
+        HP = MaxHP;
         Damage = 10;
         Defense = 0;
     }
@@ -27,6 +29,7 @@ public class Monster : MonoBehaviour, IDamageable
     protected Coroutine CurrentPattern = null;
     protected bool _patternDone = true;
     public List<Func<IEnumerator>> Patterns = new();
+    public List<int> Weights = new();
 
     public MonsterStats Stats = new();
 
@@ -62,6 +65,18 @@ public class Monster : MonoBehaviour, IDamageable
         if (Stats.HP <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void Heel(int heel)
+    {
+        if (Stats.HP + heel >= Stats.MaxHP)
+        {
+            Stats.HP = Stats.MaxHP;
+        }
+        else
+        {
+            Stats.HP += heel;
         }
     }
 }

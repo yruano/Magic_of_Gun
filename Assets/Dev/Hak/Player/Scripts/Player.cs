@@ -21,7 +21,7 @@ public class PlayerStats
     public PlayerStats()
     {
         MaxHP = 100;
-        HP = 100;
+        HP = MaxHP;
         MaxMP = 100;
         MP = 100;
         Shield = 0;
@@ -67,6 +67,18 @@ public class Player : MonoBehaviour, IDamageable
         if (Stats.HP <= 0)
         {
             Destroy(gameObject);
+        }
+    }
+
+    public void Heel(int heel)
+    {
+        if (Stats.HP + heel >= Stats.MaxHP)
+        {
+            Stats.HP = Stats.MaxHP;
+        }
+        else
+        {
+            Stats.HP += heel;
         }
     }
 
