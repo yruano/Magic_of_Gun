@@ -71,6 +71,10 @@ public class Magazine : MonoBehaviour
         //로그발생
         Debug.Log($"Magazine Clicked: {gameObject.name}");
         eventBus.PublishClickMagazineEvent(gameObject);
+
+        //!!디버그용 총알 색깔 새로고침 하라고 지침내림!!
+        foreach(Bullet bullet in bullets)
+            bullet.ColorRefresh();
     }
 
 

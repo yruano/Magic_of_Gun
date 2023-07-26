@@ -147,12 +147,12 @@ public class Gun : MonoBehaviour
         //탄창 정보따라 스프라이트-오브젝트를 만듬
         foreach (var bullet in Magazine)
         {
-            //먼저 프리팹을 참조해 오브젝를 만듬
+            //먼저 프리팹을 참조해 오브젝트를 만듬
             bulletSprite.Add(Instantiate(prefab));
             //그 후 자식 오브젝트로 만듬
             bulletSprite[bulletSprite.Count - 1].transform.SetParent(transform);
         }
-        //위치조정
+        //위치조정 //!!!여기까지 했음!!!
         MoveBulletSptite();
     }
 
