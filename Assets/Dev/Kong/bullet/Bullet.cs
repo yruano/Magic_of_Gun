@@ -10,10 +10,10 @@ public class Bullet : MonoBehaviour
     public int Damage = 0;
     [SerializeField]
     //탄피색깔
-    Color cartridgeColor;
+    public Color cartridgeColor;
     [SerializeField]
     //탄두 색깔
-    Color warHeadColor;
+    public Color warHeadColor;
     [SerializeField]
     //탄두 오브젝트 연결
     public GameObject Warhead = null;

@@ -60,6 +60,9 @@ public class Gun : MonoBehaviour
 
         //탄창 교체 확정 이벤트 구독
         eventBus.ClickLoadConfirmed += Reload;
+
+        //총알 스프라이트 준비
+        MakeBulletSprite();
     }
 
     //탄창에서 가장 위에있는 총알 반환. 계산은 총알 정보 받아서 알아서함(버프 정보때문에 이래야함)
@@ -79,12 +82,14 @@ public class Gun : MonoBehaviour
         Bullet ret = Magazine[0];
         //탄창에서 제거하고
         Magazine.RemoveAt(0);
-
+        //스프라이트 오브젝트 파괴
+        Destroy(bulletSprite[0]);
+        bulletSprite.RemoveAt(0);
         //발사횟수 증가하고
         FiredCount++;
 
-        //총알 스프라이트 위치 조정하고
-        MoveBulletSptite();
+        //총알 스프라이트 조정
+        MoveBulletSprite();
 
         //객체 반환
         return ret;
@@ -137,6 +142,8 @@ public class Gun : MonoBehaviour
         Magazine.Clear();
         //새로운 데이터를 넣음
         Magazine.AddRange(nextMagazine.GetComponent<Magazine>().bullets);
+        //총알 스프라이트 조정
+        MakeBulletSprite();
     }
 
     //잔탄을 보여주기 위해 총에 들어가있는 총알 데이터를 기반으로 총알 스프라이트 생성
@@ -151,19 +158,23 @@ public class Gun : MonoBehaviour
             bulletSprite.Add(Instantiate(prefab));
             //그 후 자식 오브젝트로 만듬
             bulletSprite[bulletSprite.Count - 1].transform.SetParent(transform);
+            //총알색 반영하도록함.
+             //먼저 색깔 데이터를 옮기고
+            bulletSprite[bulletSprite.Count - 1].GetComponent<Bullet>().cartridgeColor = bullet.cartridgeColor;
+            bulletSprite[bulletSprite.Count - 1].GetComponent<Bullet>().warHeadColor = bullet.warHeadColor;
+            //새로고침
+            bulletSprite[bulletSprite.Count - 1].GetComponent<Bullet>().ColorRefresh();
         }
-        //위치조정 //!!!여기까지 했음!!!
-        MoveBulletSptite();
+        //위치조정
+        MoveBulletSprite();
     }
 
     //총알 스프라이트의 위치를 조정함.
-    public void MoveBulletSptite()
+    public void MoveBulletSprite()
     {
-        for (int i = 0; i < Magazine.Count; i++)
-        {
+        for (int i = 0; i < bulletSprite.Count; i++)
             //좌표 설정
-            Magazine[i].gameObject.transform.localPosition = new Vector3(0f, 0.3884358f - (i * 0.1387271f), 0f);
-        }
+            bulletSprite[i].transform.position = new Vector3(transform.position.x - 3f, transform.position.y + 2.0f - (i * 0.6f), transform.position.z);
     }
 
     /* 탄창 교체 감이 안잡혔을 때 썼던 함수
