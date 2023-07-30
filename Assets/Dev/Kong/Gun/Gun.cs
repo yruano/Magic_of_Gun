@@ -140,6 +140,11 @@ public class Gun : MonoBehaviour
     {
         //기존 탄창 데이터 버림
         Magazine.Clear();
+        //기존 총알 표시 데이터 삭제
+        foreach(GameObject go in bulletSprite)
+            Destroy(go);
+        bulletSprite.Clear();
+
         //새로운 데이터를 넣음
         Magazine.AddRange(nextMagazine.GetComponent<Magazine>().bullets);
         //총알 스프라이트 조정
@@ -169,7 +174,7 @@ public class Gun : MonoBehaviour
         MoveBulletSprite();
     }
 
-    //총알 스프라이트의 위치를 조정함.
+    //총알 스프라이트의 위치를 조정함, 사실 이건 권총에 맞춰둔 위치지만 빈칸으로둘 순 없어서 일단 그래도 써둠
     public void MoveBulletSprite()
     {
         for (int i = 0; i < bulletSprite.Count; i++)

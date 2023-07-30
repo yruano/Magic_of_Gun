@@ -18,4 +18,11 @@ public class Pistol : Gun
         JamChance = 0;
         
     }
+    //총알 스프라이트의 위치를 조정함.
+    new public void MoveBulletSprite()
+    {
+        for (int i = 0; i < bulletSprite.Count; i++)
+            //좌표 설정
+            bulletSprite[i].transform.position = new Vector3(transform.position.x - 3f, transform.position.y + 2.0f - (i * 0.6f), transform.position.z);
+    }
 }
