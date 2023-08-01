@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 4203724215947135407}
   - component: {fileID: 2589696733653495985}
   m_Layer: 0
-  m_Name: empty Magazine 1
+  m_Name: MagazineSample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
