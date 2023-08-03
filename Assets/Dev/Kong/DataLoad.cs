@@ -32,12 +32,10 @@ public class DataLoad : ScriptableObject
     {
         //여기에서 sheetDat를 통해 가져온 내용을 재단할 수 있음
         //행교체 for문, 각 인덱스는 열을 나타냄
-        /*
-        for (int rows = 2; rows <= ss.rows.primaryDictionary.Count; rows++)
+        for (int rows = 2; rows <= sheetData.rows.primaryDictionary.Count; rows++)
         {
-            //
+            Item it = new item();
         }
-        */
     }
 }
 //------

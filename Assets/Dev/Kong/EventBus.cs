@@ -115,6 +115,11 @@ public class EventBus : MonoBehaviour
         }
     }
 
+    //플레이어 턴 이벤트 발생 중개
+    public void PublishPlayerTurnEvent()
+    {
+        PlayerTurn?.Invoke();
+    }
     //취소 이벤트 발생및 관련 상태 감지
     private void Update()
     {

@@ -75,6 +75,7 @@ public class Magazine : MonoBehaviour
         //!!디버그용 총알 색깔 새로고침 하라고 지침내림!!
         foreach(Bullet bullet in bullets)
             bullet.ColorRefresh();
+
     }
 
 
