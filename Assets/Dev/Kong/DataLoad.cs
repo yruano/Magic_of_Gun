@@ -34,7 +34,6 @@ public class DataLoad : ScriptableObject
         //행교체 for문, 각 인덱스는 열을 나타냄
         for (int rows = 2; rows <= sheetData.rows.primaryDictionary.Count; rows++)
         {
-            Item it = new item();
         }
     }
 }
