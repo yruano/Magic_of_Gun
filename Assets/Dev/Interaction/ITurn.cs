@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ITurn
 {
-    public void Turn(bool IsTurn);
+    public void Turn();
 }

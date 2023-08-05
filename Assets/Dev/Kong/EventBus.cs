@@ -120,10 +120,9 @@ public class EventBus : MonoBehaviour, ITurn
     {
         PlayerTurn?.Invoke();
     }
-    public void Turn(bool IsTurn)
+    public void Turn()
     {
-        if (IsTurn)
-            PublishPlayerTurnEvent();
+        PublishPlayerTurnEvent();
     }
     
     //취소 이벤트 발생및 관련 상태 감지
