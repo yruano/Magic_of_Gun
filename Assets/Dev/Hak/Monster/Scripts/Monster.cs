@@ -80,12 +80,9 @@ public class Monster : MonoBehaviour, IDamageable, ITurn
         }
     }
 
-    public void Turn(bool IsTurn)
+    public void Turn()
     {
-        if (!IsTurn)
-        {
-            _patternDone = false;
-            CurrentPattern = StartCoroutine(NextPattern());
-        }
+        _patternDone = false;
+        CurrentPattern = StartCoroutine(NextPattern());
     }
 }
