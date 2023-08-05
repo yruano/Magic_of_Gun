@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //이벤트와 상태를 중계합니다.
-public class EventBus : MonoBehaviour
+public class EventBus : MonoBehaviour, ITurn
 {
     //중립상태, 행동 취소시 진입
     public event Action<int> Cancle;
@@ -119,6 +119,11 @@ public class EventBus : MonoBehaviour
     public void PublishPlayerTurnEvent()
     {
         PlayerTurn?.Invoke();
+    }
+    public void Turn(bool IsTurn)
+    {
+        if (IsTurn)
+            PublishPlayerTurnEvent();
     }
     //취소 이벤트 발생및 관련 상태 감지
     private void Update()
