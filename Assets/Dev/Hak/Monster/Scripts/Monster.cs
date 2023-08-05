@@ -23,7 +23,7 @@ public class MonsterStats
         Defense = 0;
     }
 }
-public class Monster : MonoBehaviour, IDamageable
+public class Monster : MonoBehaviour, IDamageable, ITurn
 {
     protected Func<IEnumerator> NextPattern;
     protected Coroutine CurrentPattern = null;
@@ -77,6 +77,15 @@ public class Monster : MonoBehaviour, IDamageable
         else
         {
             Stats.HP += heel;
+        }
+    }
+
+    public void Turn(bool IsTurn)
+    {
+        if (!IsTurn)
+        {
+            _patternDone = false;
+            CurrentPattern = StartCoroutine(NextPattern());
         }
     }
 }

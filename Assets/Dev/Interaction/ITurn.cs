@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turn : MonoBehaviour
+public interface ITurn
 {
-
+    public void Turn(bool IsTurn);
 }
