@@ -18,6 +18,7 @@ public class DataLoad : ScriptableObject
     //ItemBaseData 데이터 읽어서 저장할 곳
     public List<Item> itemData = new List<Item>();
     //ItemBulletBaseData 데이터 읽어서 저장할 곳
+    public List<ItemBulletData> bulletDatas = new List<ItemBulletData>();
 
     //데이터 불러오고 다른곳에 저장하라 시킴
     private void Awake()
@@ -50,8 +51,8 @@ public class DataLoad : ScriptableObject
                 tmpItemData.BaseData.Name = sheetData.rows[rows][1].value;
                 //Desc를 옮겨적음
                 tmpItemData.BaseData.Desc = sheetData.rows[rows][2].value;
-                //image를 옮겨적음, !!경로를 어떻게 저장할 지 약속되지 않았음!!
-                tmpItemData.BaseData.Image = Resources.Load<Sprite>(sheetData.rows[rows][3].value);
+                //image를 옮겨적음, !!경로를 어떻게 저장할 지 약속되지 않아서 실제로 읽어와 저장하면 오류발생!!
+                //tmpItemData.BaseData.Image = Resources.Load<Sprite>(sheetData.rows[rows][3].value);
                 
                 //인스턴스를 리스트에 등록함
                 itemData.Add(tmpItemData);
@@ -64,8 +65,15 @@ public class DataLoad : ScriptableObject
                 //PartType을 옮겨적음
                 itemBulletData.BulletBaseData.PartType = sheetData.rows[rows][4].value;
                 //Damage를 옮겨적음
+                itemBulletData.BulletBaseData.Damage = int.Parse(sheetData.rows[rows][5].value);
+                //Percent를 옮겨적음
+                itemBulletData.BulletBaseData.Percent = float.Parse(sheetData.rows[rows][6].value);
+                
+                //인스턴스를 등록함
+                bulletDatas.Add(itemBulletData);
             }
         }
+
     }
 }
 //------

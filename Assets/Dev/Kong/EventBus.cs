@@ -125,6 +125,7 @@ public class EventBus : MonoBehaviour, ITurn
         if (IsTurn)
             PublishPlayerTurnEvent();
     }
+    
     //취소 이벤트 발생및 관련 상태 감지
     private void Update()
     {
