@@ -67,7 +67,7 @@ public class EventBus : MonoBehaviour, ITurn
     public void PublishClickMonsterEvent(GameObject target)
     {
         //조준중 상태이라면
-        if(State == AIMING)
+        if (State == AIMING)
         {
             //목표 지정 상태로 변경
             State = SELECT_TARGET;
@@ -80,7 +80,7 @@ public class EventBus : MonoBehaviour, ITurn
     public void PublishClickTrigerEvent(int info)
     {
         //목표 선택 상태라면
-        if(State == SELECT_TARGET)
+        if (State == SELECT_TARGET)
         {
             //방아쇠 이벤트 발생
             ClickTriger?.Invoke(info);
@@ -93,7 +93,7 @@ public class EventBus : MonoBehaviour, ITurn
     public void PublishClickMagazineEvent(GameObject info)
     {
         //중립 상태이고, 사격한적이 없다면
-        if(State == NEUTRAL && !fired)
+        if (State == NEUTRAL && !fired)
         {
             //상태 탄창 선택 상태로 변결
             State = SELECT_MAGAZINE;
@@ -124,7 +124,7 @@ public class EventBus : MonoBehaviour, ITurn
     {
         PublishPlayerTurnEvent();
     }
-    
+
     //취소 이벤트 발생및 관련 상태 감지
     private void Update()
     {
@@ -134,13 +134,13 @@ public class EventBus : MonoBehaviour, ITurn
             // 마우스 오른쪽 버튼이 클릭되었다고 일단 로그에 보냄
             Debug.Log("Right button clicked.");
             //중립 상태가 아니라면
-            if(State != NEUTRAL)
+            if (State != NEUTRAL)
             {
                 //중립상태로 변경
                 State = NEUTRAL;
                 //취소 이벤트 발생
                 PublishCancleEvent(0);
-                
+
             }
         }
         //!!임시, 다음턴 이벤트 굴리는 용도로 엔터 감지!!
@@ -150,7 +150,7 @@ public class EventBus : MonoBehaviour, ITurn
             //플레이어 턴 이벤트 발생
             PlayerTurn?.Invoke();
         }
-        
+
 
     }
 

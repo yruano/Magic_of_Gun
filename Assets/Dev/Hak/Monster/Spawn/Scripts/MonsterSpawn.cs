@@ -6,6 +6,7 @@ public class MonsterSpawn : MonoBehaviour
 {
     public List<GameObject> P_Monster;
     public List<Transform> Pos = new();
+    public TurnManager Turnmanager;
 
     private void Start()
     {
@@ -15,7 +16,8 @@ public class MonsterSpawn : MonoBehaviour
     {
         for (int i = 0; i < Pos.Count; i++)
         {
-            Instantiate(P_Monster[1], Pos[i].position, Quaternion.identity);
+            GameObject obj = Instantiate(P_Monster[1], Pos[i].position, Quaternion.identity);
+            // TurnManager.AddMonster(obj);
         }
     }
 }
