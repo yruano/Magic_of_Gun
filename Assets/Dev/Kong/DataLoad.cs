@@ -15,10 +15,8 @@ public class DataLoad : ScriptableObject
     public string associatedSheet = "1mpe5Gjq7nO5HTYhLEZkTnNSrFAMFnCKSGZ0tyuJynds";
     public string associatedWorksheet = "Guns";
 
-    //ItemBaseData 데이터 읽어서 저장할 곳
+    //Item 데이터 읽어서 저장할 곳
     public List<Item> itemData = new List<Item>();
-    //ItemBulletBaseData 데이터 읽어서 저장할 곳
-    public List<ItemBulletData> bulletDatas = new List<ItemBulletData>();
 
     //데이터 불러오고 다른곳에 저장하라 시킴
     private void Awake()
@@ -40,25 +38,23 @@ public class DataLoad : ScriptableObject
         //행교체 for문, 각 인덱스는 열을 나타냄, 행값은 1부터 존재하고, 1은 열의 분류를 나타내니 2부터 시작해야함
         for (int rows = 2; rows <= sheetData.rows.primaryDictionary.Count; rows++)
         {
-            //이번 행의 길이가 3일때 == item 데이터를 읽을 때
-            if(sheetData.rows[rows].Count == 3)
-            {
-                //새 아이템 인스턴스를 만들고 
-                Item tmpItemData = new Item();
-                //itemType을 옮겨 적음
-                tmpItemData.BaseData.ItemType = sheetData.rows[rows][0].value;
-                //name를 옮겨적음
-                tmpItemData.BaseData.Name = sheetData.rows[rows][1].value;
-                //Desc를 옮겨적음
-                tmpItemData.BaseData.Desc = sheetData.rows[rows][2].value;
-                //image를 옮겨적음, !!경로를 어떻게 저장할 지 약속되지 않아서 실제로 읽어와 저장하면 오류발생!!
-                //tmpItemData.BaseData.Image = Resources.Load<Sprite>(sheetData.rows[rows][3].value);
+            //기본 데이터 입력
+            //새 아이템 인스턴스를 만듦. 지금 불러올 데이터의 메인 저장소.
+            Item tmpItemData = new Item();
+            //itemType을 옮겨 적음
+            tmpItemData.BaseData.ItemType = sheetData.rows[rows][0].value;
+            //name를 옮겨적음
+            tmpItemData.BaseData.Name = sheetData.rows[rows][1].value;
+            //Desc를 옮겨적음
+            tmpItemData.BaseData.Desc = sheetData.rows[rows][2].value;
+            //image를 옮겨적음, !!경로를 어떻게 저장할 지 약속되지 않아서 실제로 읽어와 저장하면 오류발생!!
+            //tmpItemData.BaseData.Image = Resources.Load<Sprite>(sheetData.rows[rows][3].value);
                 
-                //인스턴스를 리스트에 등록함
-                itemData.Add(tmpItemData);
-            }
-            //이번행의 길이가 7일때 == ItemBulletData를 읽을때
-            else if (sheetData.rows[rows].Count == 7)
+            //인스턴스를 리스트에 등록함
+            itemData.Add(tmpItemData);
+
+            //4번 인덱스의 값이 존재할 때 == ItemBulletData를 읽을때
+            if (sheetData.rows[rows][4].value != "")
             {
                 //새 ItemBulletData 인스턴스를 만들고
                 ItemBulletData itemBulletData = new ItemBulletData();
@@ -69,11 +65,10 @@ public class DataLoad : ScriptableObject
                 //Percent를 옮겨적음
                 itemBulletData.BulletBaseData.Percent = float.Parse(sheetData.rows[rows][6].value);
                 
-                //인스턴스를 등록함
-                bulletDatas.Add(itemBulletData);
+                //인스턴스를 메인 저장소에 등록
+                tmpItemData.ItemData = itemBulletData;
             }
         }
-
     }
 }
 //------
