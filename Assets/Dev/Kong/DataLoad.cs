@@ -1,6 +1,7 @@
 using GoogleSheetsToUnity;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -52,9 +53,11 @@ public class DataLoad : ScriptableObject
                 
             //인스턴스를 리스트에 등록함
             itemData.Add(tmpItemData);
+            //로드 완료된 걸 확인해서 로그에 남긴다
+            string logMessage = "item load, name: " + tmpItemData.BaseData.Name + ", Desc: " + tmpItemData.BaseData.Desc + ", ItemType: " + tmpItemData.BaseData.ItemType;
 
             //4번 인덱스의 값이 존재할 때 == ItemBulletData를 읽을때
-            if (sheetData.rows[rows][4].value != "")
+            if (sheetData.rows[rows].Count >= 5 && sheetData.rows[rows][4].value != "")
             {
                 //새 ItemBulletData 인스턴스를 만들고
                 ItemBulletData itemBulletData = new ItemBulletData();
@@ -67,9 +70,19 @@ public class DataLoad : ScriptableObject
                 
                 //인스턴스를 메인 저장소에 등록
                 tmpItemData.ItemData = itemBulletData;
+
+                //그것도 로그에 남긴다
+                logMessage += (" (and it has bullet Data) Damage: " + itemBulletData.BulletBaseData.Damage +
+                           ", PartType: " + itemBulletData.BulletBaseData.PartType +
+                           ", Percent: " + itemBulletData.BulletBaseData.Percent);
             }
+            //로그로 발송
+            Debug.Log(logMessage);
         }
+
     }
+
+
 }
 //------
 //inspector창 구성
