@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterSpawn : MonoBehaviour
+public class MonsterSpawnAndTurn : MonoBehaviour
 {
     public List<GameObject> P_Monster;
     public List<Transform> Pos = new();
