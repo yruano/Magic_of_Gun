@@ -3,13 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.GraphicsBuffer;
 
-[CreateAssetMenu(fileName = "DataLoad", menuName = "Scriptable Object/DataLoad_LoadTest")]
-public class DataLoad : ScriptableObject
+public class DataLoad : MonoBehaviour
 {
 
     [SerializeField]
@@ -20,7 +17,7 @@ public class DataLoad : ScriptableObject
     public List<Item> itemData = new List<Item>();
 
     //데이터 불러오고 다른곳에 저장하라 시킴
-    private void Awake()
+    public void Awake()
     {
         LoadDataCall(ProcessingData);
     }
@@ -83,33 +80,4 @@ public class DataLoad : ScriptableObject
     }
 
 
-}
-//------
-//inspector창 구성
-[CustomEditor(typeof(DataLoad))]
-public class DataTest : Editor
-{
-    DataLoad data;
-
-    //초기화
-    void OnEnable()
-    {
-        data = (DataLoad)target;
-    }
-
-    //버튼 구성
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-
-        //버튼설명
-        GUILayout.Label("Read Data Examples");
-
-        //버튼 정의
-        if (GUILayout.Button("Pull Data Method One"))
-        {
-            //버튼 클릭시 불러올애들
-            data.LoadDataCall(data.ProcessingData);
-        }
-    }
 }
