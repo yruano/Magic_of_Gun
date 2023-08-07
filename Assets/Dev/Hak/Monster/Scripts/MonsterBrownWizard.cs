@@ -45,6 +45,7 @@ public class MonsterBrownWizard : Monster
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();
 
+        Debug.Log(randomIndex);
         NextPattern = Patterns[randomIndex];
     }
 
