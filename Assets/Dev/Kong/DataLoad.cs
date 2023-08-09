@@ -76,7 +76,7 @@ public class DataLoad : MonoBehaviour
             //로그로 발송
             Debug.Log(logMessage);
         }
-
+        
     }
 
 

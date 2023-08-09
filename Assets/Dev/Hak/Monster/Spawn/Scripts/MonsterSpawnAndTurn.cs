@@ -24,7 +24,6 @@ public class MonsterSpawnAndTurn : MonoBehaviour
             GameObject obj = Instantiate(P_Monster[index], Pos[i].position, Quaternion.identity);
             SpawnMonster.Add(obj);
         }
-
     }
 
     public void StartTurn()
