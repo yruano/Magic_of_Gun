@@ -63,5 +63,43 @@ public class Bullet : MonoBehaviour
         //탄피
         CartridgeCase.GetComponent<SpriteRenderer>().color = cartridgeColor;
     }
+
+    //자식 오브젝트 교체
+    //탄두 교체
+    public void ReplaceWarHead(GameObject newWarhead)
+    {
+        //기존 오브젝트가 존재한다면
+        if (Warhead != null)
+        {
+            //기존 오브젝트 삭제
+            Destroy(Warhead);
+        }
+        //새로 입력받은 오브젝트로 교체
+        Warhead = newWarhead;
+        //자식으로 등록
+        Warhead.transform.SetParent(transform);
+        //색깔 데이터 교체
+        warHeadColor = Warhead.GetComponent<SpriteRenderer>().color;
+        //탄두 위치 이동
+        Warhead.transform.localPosition = new Vector3(1, 0, 0);
+    }
+    //탄피 교체
+    public void ReplaceCartridge(GameObject newCartridgeCase)
+    {
+        //기존 오브젝트가 존재한다면
+        if (CartridgeCase != null)
+        {
+            //기존 오브젝트 삭제
+            Destroy(CartridgeCase);
+        }
+        //새로 입력받은 오브젝트로 교체
+        CartridgeCase = newCartridgeCase;
+        //자식으로 등록
+        CartridgeCase.transform.SetParent(transform);
+        //색깔 데이터 교체
+        cartridgeColor = CartridgeCase.GetComponent<SpriteRenderer>().color;
+        //탄피 위치 이동
+        CartridgeCase.transform.localPosition = new Vector3(0, 0, 0);
+    }
     //어쩌구 저쩌구 데이터.. 아마 디버프가 들어올것
 }
