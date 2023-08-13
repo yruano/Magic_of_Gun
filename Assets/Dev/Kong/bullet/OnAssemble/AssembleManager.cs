@@ -14,6 +14,9 @@ public class AssembleManeger : MonoBehaviour
     //생성시 참조할 프리팹
     GameObject prefab = null;
 
+    //조립된 총알을 저장할곳
+    List<GameObject> AssembledBullet = new List<GameObject>();
+
     //선택한 객체를 x축을 기준으로 이동시킴
     private void MoveObjectX(GameObject Object, int distance)
     {
@@ -76,8 +79,30 @@ public class AssembleManeger : MonoBehaviour
 
         //총알 데이터 교체
         Bullet Data = Bullet.GetComponent<Bullet>();
-        Data.ReplaceWarHead(Instantiate(WarHead));
-        Data.ReplaceCartridge(Instantiate(Cartridge));
+        //다시 클릭되는 일을 막기 위해 collider를 제거함
+        //탄두 전달
+        GameObject tmpPointer = Instantiate(WarHead);
+        Destroy(tmpPointer.GetComponent<CircleCollider2D>());
+        Data.ReplaceWarHead(tmpPointer);
+        //탄피 전달
+        tmpPointer = Instantiate(Cartridge);
+        Destroy(tmpPointer.GetComponent<BoxCollider2D>());
+        Data.ReplaceCartridge(tmpPointer);
         Data.ColorRefresh();
+    }
+
+    //조립 확정 받은 총알을 리스트에 추가, instance해서 새로운 총알을 입력해야함.
+    public void AddBullet(GameObject newBullet)
+    {
+        //위치이동
+        Vector3 tmpPosition = newBullet.transform.position;
+        tmpPosition.x = -9.5f + (1.5f * AssembledBullet.Count);
+        tmpPosition.y = -4;
+        newBullet.transform.position = tmpPosition;
+
+        //리스트에 추가
+        AssembledBullet.Add(newBullet);
+        //무한 복제를 막기위해 정보를 전달하는 컴포넌트를 제거함
+        Destroy(newBullet.GetComponent<BulletOnAssemble>());
     }
 }

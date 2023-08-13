@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1623202612460883158}
   - component: {fileID: 7681808135769528891}
   - component: {fileID: 7070116245095025651}
+  - component: {fileID: -7031222501181184832}
   m_Layer: 0
   m_Name: Bullet Assemble
   m_TagString: Bullet
@@ -108,3 +109,15 @@ MonoBehaviour:
   warHeadColor: {r: 0, g: 0, b: 0, a: 0}
   Warhead: {fileID: 0}
   CartridgeCase: {fileID: 0}
+--- !u!114 &-7031222501181184832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866114514221162674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d3356429f126c4aaa6002e604b32a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
