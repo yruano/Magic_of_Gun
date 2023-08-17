@@ -131,8 +131,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 0
-  cartridgeColor: {r: 1, g: 0.68235296, b: 0, a: 1}
+  cartridgeColor: {r: 0.019500999, g: 0.488, b: 0, a: 1}
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
+  Warhead: {fileID: 0}
+  CartridgeCase: {fileID: 0}
 --- !u!1 &6889321724011962521
 GameObject:
   m_ObjectHideFlags: 0
