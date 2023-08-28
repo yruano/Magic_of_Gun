@@ -5,6 +5,11 @@ using UnityEngine;
 public class MonsterBossWizard : Monster
 {
     public GameObject P_Bullet;
+    private bool _attributeCounter;
+    private bool _actionCounterBuff;
+    private int _attributeCounterCount;
+    private int _maxCount;
+    private int _actionCounterBuffShield;
     public MonsterBossWizard()
     {
         Stats.DropItems = new[]
@@ -15,11 +20,20 @@ public class MonsterBossWizard : Monster
 
     private void Start()
     {
-        Weights = new List<int> { 5, 4, 3, 2 };
+        Weights = new List<int> { 5, 4, 3, 2, 1 };
+
         Patterns.Add(PatternAttack);
         Patterns.Add(PatternRest);
-        Patterns.Add(PatternDefenseBuff);
-        Patterns.Add(PatternDamageBuff);
+        Patterns.Add(PatternAttributeCounter);
+        Patterns.Add(PatternDeleteBullet);
+        Patterns.Add(PatternActionCounterBuff);
+
+        _attributeCounter = false;
+        _actionCounterBuff = false;
+        _attributeCounterCount = 0;
+        _maxCount = 5;
+        _actionCounterBuffShield = 0;
+
         RandomPattern();
     }
 
@@ -45,29 +59,95 @@ public class MonsterBossWizard : Monster
         yield return null;
     }
 
-    private IEnumerator PatternDefenseBuff()
-    {
-        Debug.Log("방어력 강화");
-        Stats.Defense += 5;
-        _patternDone = true;
-        RandomPattern();
-        yield return null;
-    }
-
-    private IEnumerator PatternDamageBuff()
-    {
-        Debug.Log("대미지 강화");
-        Stats.Damage += 5;
-        _patternDone = true;
-        RandomPattern();
-        yield return null;
-    }
-
-    public IEnumerator PatternRest()
+    private IEnumerator PatternRest()
     {
         Debug.Log("휴식");
+
         _patternDone = true;
         RandomPattern();
         yield return null;
+    }
+    private IEnumerator PatternAttributeCounter()
+    {
+        _attributeCounter = true;
+        _attributeCounterCount = _maxCount;
+
+        _patternDone = true;
+        RandomPattern();
+        yield return null;
+    }
+
+    private IEnumerator PatternDeleteBullet()
+    {
+        _patternDone = true;
+        RandomPattern();
+        yield return null;
+    }
+
+    private IEnumerator PatternActionCounterBuff()
+    {
+        _actionCounterBuff = true;
+        _actionCounterBuffShield = 1000;
+
+        _patternDone = true;
+        RandomPattern();
+        yield return null;
+    }
+
+    public override void Damage(int damage)
+    {
+        if (_attributeCounter)
+        {
+            Stats.HP -= damage;
+        }
+        else if (_actionCounterBuff)
+        {
+            _actionCounterBuffShield -= damage;
+
+            if (_actionCounterBuffShield <= 0)
+            {
+                _actionCounterBuffShield = 0;
+                _actionCounterBuff = false;
+            }
+        }
+        else
+        {
+            if (Stats.Defense == 0)
+            {
+                Stats.HP -= damage;
+            }
+            else
+            {
+                if (Stats.Defense >= damage)
+                {
+                    Stats.Defense -= damage;
+                }
+                else
+                {
+                    damage -= Stats.Defense;
+                    Stats.Defense = 0;
+                    Stats.HP -= damage;
+                }
+            }
+        }
+
+        if (Stats.HP <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public override void Turn()
+    {
+        if (_patternDone is true && NextPattern is not null)
+        {
+            _patternDone = false;
+            CurrentPattern = StartCoroutine(NextPattern());
+
+            if (_attributeCounter)
+            {
+                _attributeCounterCount -= 1;
+            }
+        }
     }
 }

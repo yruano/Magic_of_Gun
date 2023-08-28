@@ -12,7 +12,9 @@ public class MonsterStats
     public int Damage;
     [SerializeField]
     public int Defense;
+    [SerializeField]
     public int MaxHP;
+    [SerializeField]
     public MonsterDropItemData[] DropItems;
 
     public MonsterStats()
@@ -80,7 +82,7 @@ public class Monster : MonoBehaviour, IDamageable, ITurn
         }
     }
 
-    public void Turn()
+    public virtual void Turn()
     {
         if (_patternDone is true && NextPattern is not null)
         {

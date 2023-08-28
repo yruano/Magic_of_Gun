@@ -17,8 +17,8 @@ public class MonsterBrownWizardStats
 public class MonsterBrownWizard : Monster
 {
     public GameObject P_Bullet;
+    private int _maxCount;
     private int _patternCount;
-    public int MaxCount;
     private MonsterBrownWizardStats _brownwizardstats = new();
     public MonsterBrownWizard()
     {
@@ -33,7 +33,7 @@ public class MonsterBrownWizard : Monster
         Weights = new List<int> { 6, 3 };
 
         _patternCount = 0;
-        MaxCount = 5;
+        _maxCount = 5;
 
         Patterns.Add(PatternRest);
         Patterns.Add(PatternDefenseBuff);
@@ -63,9 +63,9 @@ public class MonsterBrownWizard : Monster
         Debug.Log("공격");
         var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
         bullet.GetComponent<MonsterMagic>().Damage = Stats.Damage + _brownwizardstats.CounterAttack;
+        _patternCount = 0;
 
         _patternDone = true;
-        _patternCount = 0;
         NextPattern = PatternCounterAttack;
         yield return null;
     }
@@ -75,25 +75,25 @@ public class MonsterBrownWizard : Monster
         Debug.Log("방어력 강화");
         Stats.Defense += 5;
 
-        _patternDone = true;
 
-        if (MaxCount == _patternCount) { NextPattern = PatternAttack; }
+        if (_maxCount == _patternCount) { NextPattern = PatternAttack; }
         else { RandomPattern(); }
         _patternCount += 1;
 
+        _patternDone = true;
         yield return null;
     }
 
-    public IEnumerator PatternRest()
+    private IEnumerator PatternRest()
     {
         Debug.Log("휴식");
 
-        _patternDone = true;
 
-        if (MaxCount == _patternCount) { NextPattern = PatternAttack; }
+        if (_maxCount == _patternCount) { NextPattern = PatternAttack; }
         else { RandomPattern(); }
         _patternCount += 1;
 
+        _patternDone = true;
         yield return null;
     }
 
