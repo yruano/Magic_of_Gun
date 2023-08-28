@@ -187,7 +187,7 @@ namespace GoogleSheetsToUnity.ThirdPary
 
         // current state
         private object current;
-        private Type currentType;
+        private System.Type currentType;
         private float timer; // for WaitForSeconds support    
         private EditorCoroutine nestedCoroutine; // for tracking nested coroutines that are not started with EditorCoroutineRunner.StartCoroutine
         private DateTime lastUpdateTime;
