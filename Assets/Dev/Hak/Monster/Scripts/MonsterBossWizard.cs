@@ -8,8 +8,10 @@ public class MonsterBossWizard : Monster
     private bool _attributeCounter;
     private bool _actionCounterBuff;
     private int _attributeCounterCount;
-    private int _maxCount;
     private int _actionCounterBuffShield;
+    private int _maxCount;
+    private List<string> _attributes;
+    private string _attribute = "";
     public MonsterBossWizard()
     {
         Stats.DropItems = new[]
@@ -21,6 +23,7 @@ public class MonsterBossWizard : Monster
     private void Start()
     {
         Weights = new List<int> { 5, 4, 3, 2, 1 };
+        _attributes = new List<string> { "", "", "", "" };
 
         Patterns.Add(PatternAttack);
         Patterns.Add(PatternRest);
@@ -72,6 +75,9 @@ public class MonsterBossWizard : Monster
         _attributeCounter = true;
         _attributeCounterCount = _maxCount;
 
+        int index = Random.Range(0, _attributes.Count);
+        _attribute = _attributes[index];
+
         _patternDone = true;
         RandomPattern();
         yield return null;
@@ -98,7 +104,26 @@ public class MonsterBossWizard : Monster
     {
         if (_attributeCounter)
         {
-            Stats.HP -= damage;
+            if (_attribute == "")
+            {
+                if (Stats.Defense == 0)
+                {
+                    Stats.HP -= damage;
+                }
+                else
+                {
+                    if (Stats.Defense >= damage)
+                    {
+                        Stats.Defense -= damage;
+                    }
+                    else
+                    {
+                        damage -= Stats.Defense;
+                        Stats.Defense = 0;
+                        Stats.HP -= damage;
+                    }
+                }
+            }
         }
         else if (_actionCounterBuff)
         {
