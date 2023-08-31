@@ -9,3 +9,6 @@
 - 유니티의 새로운 기능들 학습 및 적용
 
 ## 레퍼런스 게임
+
+스테이지 진행 방식: https://store.steampowered.com/app/646570/Slay_the_Spire/
+전투 방식: https://store.steampowered.com/app/1706210/Reloader_test_subject/
