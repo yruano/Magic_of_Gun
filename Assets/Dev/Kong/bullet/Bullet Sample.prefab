@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e00200ff46d27df419486faa25324ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 0
+  Damage: 10
   cartridgeColor: {r: 0.019500999, g: 0.488, b: 0, a: 1}
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   Warhead: {fileID: 0}
