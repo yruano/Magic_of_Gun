@@ -19,7 +19,7 @@ MonoBehaviour:
   API_Key: 
   PORT: 8080
   gdr:
-    access_token: ya29.a0AfB_byAZ3yI5Ew_EKSSDsCAx596cu4KF1ZQbHfE6LFQOyoV1AFfb6fr3kS_dk1I7-BeelCTE3yYXhSCNh--H0qwXX1KspkgD9is3wUQn7O0ihSApB2BKj0YxTbXXEhQlzyvsqWJ9dg8WEOHs0uTsuqhO3iLu1Q6TaCgYKAWQSARASFQHsvYlsMzXQ51nuD7HkLcG5RZQIgQ0167
+    access_token: 
     refresh_token: 1//0eCcqUY70AWVkCgYIARAAGA4SNwF-L9Ir-1n6p-OZyDHkvG-2s3O4g6tkUFBuvLOtQOShAkMrED7sXGVt_stFMnRiRqQF4v8F09g
     token_type: Bearer
     expires_in: 3599
