@@ -62,7 +62,7 @@ public class MonsterBrownWizard : Monster
     {
         Debug.Log("공격");
         var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
-        bullet.GetComponent<MonsterMagic>().Damage = Stats.Damage + _brownwizardstats.CounterAttack;
+        bullet.GetComponent<MonsterMagic>().Damage = Stats.Damage;
         _patternCount = 0;
 
         _patternDone = true;
@@ -99,10 +99,13 @@ public class MonsterBrownWizard : Monster
 
     public override void Damage(int damage)
     {
+        Debug.Log("몬스터 : " + damage + "를 받았습니다.");
+
         if (_brownwizardstats.Counter is true)
         {
             _brownwizardstats.CounterAttack += damage;
-            Debug.Log(_brownwizardstats.CounterAttack);
+            var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
+            bullet.GetComponent<MonsterMagic>().Damage = _brownwizardstats.CounterAttack;
         }
 
         if (Stats.Defense == 0)
@@ -122,6 +125,9 @@ public class MonsterBrownWizard : Monster
                 Stats.HP -= damage;
             }
         }
+
+        Debug.Log("몬스터 남은 Defense : " + Stats.Defense);
+        Debug.Log("몬스터 남은 HP : " + Stats.HP);
 
         if (Stats.HP <= 0)
         {

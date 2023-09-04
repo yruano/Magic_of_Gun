@@ -19,10 +19,10 @@ public class MonsterStats
 
     public MonsterStats()
     {
-        MaxHP = 10;
+        MaxHP = 1000;
         HP = MaxHP;
         Damage = 10;
-        Defense = 0;
+        Defense = 20;
     }
 }
 public class Monster : MonoBehaviour, IDamageable, ITurn
@@ -46,6 +46,8 @@ public class Monster : MonoBehaviour, IDamageable, ITurn
 
     public virtual void Damage(int damage)
     {
+        Debug.Log("몬스터 : " + damage + "를 받았습니다.");
+
         if (Stats.Defense == 0)
         {
             Stats.HP -= damage;
@@ -63,6 +65,9 @@ public class Monster : MonoBehaviour, IDamageable, ITurn
                 Stats.HP -= damage;
             }
         }
+
+        Debug.Log("몬스터 남은 Defense : " + Stats.Defense);
+        Debug.Log("몬스터 남은 HP : " + Stats.HP);
 
         if (Stats.HP <= 0)
         {

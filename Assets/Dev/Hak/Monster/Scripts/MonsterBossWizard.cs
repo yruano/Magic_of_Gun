@@ -102,6 +102,8 @@ public class MonsterBossWizard : Monster
 
     public override void Damage(int damage)
     {
+        Debug.Log("몬스터 : " + damage + "를 받았습니다.");
+        
         if (_attributeCounter)
         {
             if (_attribute == "")
@@ -155,6 +157,9 @@ public class MonsterBossWizard : Monster
                 }
             }
         }
+
+        Debug.Log("몬스터 남은 Defense : " + Stats.Defense);
+        Debug.Log("몬스터 남은 HP : " + Stats.HP);
 
         if (Stats.HP <= 0)
         {

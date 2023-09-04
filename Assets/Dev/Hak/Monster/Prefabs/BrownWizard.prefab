@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7403842948735825495}
   - component: {fileID: 2275458403570418180}
   - component: {fileID: 7514367674199038398}
+  - component: {fileID: 4769795639020321881}
   m_Layer: 0
   m_Name: BrownWizard
   m_TagString: Untagged
@@ -93,12 +94,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Weights: 
   Stats:
-    HP: 10
+    HP: 100
     Damage: 10
-    Defense: 0
+    Defense: 5
     MaxHP: 10
   P_Bullet: {fileID: 5997588116107216800, guid: c5454cac5b6b7d24c813f05f099c16c4, type: 3}
-  MaxCount: 5
+--- !u!114 &4769795639020321881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2831289341180057623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e355d3fdf58b8bb4ba6499a2563567f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5792460740494048153
 GameObject:
   m_ObjectHideFlags: 0
