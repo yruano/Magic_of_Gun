@@ -50,7 +50,7 @@ public class MonsterBrownWizard : Monster
 
     private IEnumerator PatternCounterAttack()
     {
-        Debug.Log("카운터 시작");
+        Debug.Log("몬스터: 카운터 시작");
         _brownwizardstats.Counter = true;
 
         _patternDone = true;
@@ -60,7 +60,7 @@ public class MonsterBrownWizard : Monster
 
     private IEnumerator PatternAttack()
     {
-        Debug.Log("공격");
+        Debug.Log("몬스터: 공격");
         var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
         bullet.GetComponent<MonsterMagic>().Damage = Stats.Damage;
         _patternCount = 0;
@@ -72,7 +72,7 @@ public class MonsterBrownWizard : Monster
 
     private IEnumerator PatternDefenseBuff()
     {
-        Debug.Log("방어력 강화");
+        Debug.Log("몬스터: 방어력 강화");
         Stats.Defense += 5;
 
 
@@ -86,7 +86,7 @@ public class MonsterBrownWizard : Monster
 
     private IEnumerator PatternRest()
     {
-        Debug.Log("휴식");
+        Debug.Log("몬스터: 휴식");
 
 
         if (_maxCount == _patternCount) { NextPattern = PatternAttack; }
@@ -103,7 +103,7 @@ public class MonsterBrownWizard : Monster
 
         if (_brownwizardstats.Counter is true)
         {
-            _brownwizardstats.CounterAttack += damage;
+            _brownwizardstats.CounterAttack = damage;
             var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
             bullet.GetComponent<MonsterMagic>().Damage = _brownwizardstats.CounterAttack;
         }

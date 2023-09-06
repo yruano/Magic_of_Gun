@@ -36,6 +36,8 @@ public class MonsterBlueWizard : Monster
 
     private IEnumerator PatternAttack()
     {
+        Debug.Log("몬스터: 공격");
+
         var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
         bullet.GetComponent<MonsterMagic>().Damage = Stats.Damage;
 
@@ -46,7 +48,7 @@ public class MonsterBlueWizard : Monster
 
     private IEnumerator PatternDefenseBuff()
     {
-        Debug.Log("방어력 강화");
+        Debug.Log("몬스터: 방어력 강화");
         Stats.Defense += 5;
 
         _patternDone = true;
@@ -56,7 +58,7 @@ public class MonsterBlueWizard : Monster
 
     private IEnumerator PatternDamageBuff()
     {
-        Debug.Log("대미지 강화");
+        Debug.Log("몬스터: 대미지 강화");
         Stats.Damage += 5;
 
         _patternDone = true;
@@ -66,7 +68,7 @@ public class MonsterBlueWizard : Monster
 
     private IEnumerator PatternRest()
     {
-        Debug.Log("휴식");
+        Debug.Log("몬스터: 휴식");
         
         _patternDone = true;
         RandomPattern();

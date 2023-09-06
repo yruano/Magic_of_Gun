@@ -16,6 +16,7 @@ public class MonsterSpawnAndTurn : MonoBehaviour
         IsTurn = true;
         StartTurn();
     }
+
     public void Spawn()
     {
         for (int i = 0; i < Pos.Count; i++)
@@ -56,13 +57,21 @@ public class MonsterSpawnAndTurn : MonoBehaviour
 
     private void Update()
     {
+        SpawnMonster.RemoveAll(item => item == null);
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             StartTurn();
         }
+
         if (Input.GetKeyDown(KeyCode.S))
         {
             EndTurn();
+        }
+
+        if (SpawnMonster.Count == 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -6,10 +6,10 @@ public class MonsterBossWizard : Monster
 {
     public GameObject P_Bullet;
     private bool _attributeCounter;
-    private bool _actionCounterBuff;
+    private bool _chargeAttack;
     private int _attributeCounterCount;
-    private int _actionCounterBuffShield;
     private int _maxCount;
+    private int _charge;
     private List<string> _attributes;
     private string _attribute = "";
     public MonsterBossWizard()
@@ -23,19 +23,19 @@ public class MonsterBossWizard : Monster
     private void Start()
     {
         Weights = new List<int> { 5, 4, 3, 2, 1 };
-        _attributes = new List<string> { "", "", "", "" };
+        _attributes = new List<string> { "Fire", "Water", "Earth", "Wind" };
 
         Patterns.Add(PatternAttack);
         Patterns.Add(PatternRest);
         Patterns.Add(PatternAttributeCounter);
+        Patterns.Add(PatternCharge);
         Patterns.Add(PatternDeleteBullet);
-        Patterns.Add(PatternActionCounterBuff);
 
         _attributeCounter = false;
-        _actionCounterBuff = false;
+        _chargeAttack = false;
+        _charge = 0;
         _attributeCounterCount = 0;
         _maxCount = 5;
-        _actionCounterBuffShield = 0;
 
         RandomPattern();
     }
@@ -45,15 +45,26 @@ public class MonsterBossWizard : Monster
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();
 
-        NextPattern = Patterns[randomIndex];
+        if (_chargeAttack)
+        {
+            if (_charge == 0)
+            {
+                NextPattern = PatternChargeAttack;
+            }
+            else
+            {
+                NextPattern = PatternRest;
+            }
+        }
+        else
+        {
+            NextPattern = Patterns[randomIndex];
+        }
     }
-
-    // 플레이어의 총알을 강제로 줄임
-    // 몬스터가 랜덤으로 속성 선택 그 속성에 맞지 않는다면 반격데미지를 줌
-    // 자신에게 버프를검 버프는 플레이어의 행동에 따라 추가적인 행동을함
 
     private IEnumerator PatternAttack()
     {
+        Debug.Log("보스: 공격");
         var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
         bullet.GetComponent<MonsterMagic>().Damage = Stats.Damage;
 
@@ -64,7 +75,7 @@ public class MonsterBossWizard : Monster
 
     private IEnumerator PatternRest()
     {
-        Debug.Log("휴식");
+        Debug.Log("보스: 휴식");
 
         _patternDone = true;
         RandomPattern();
@@ -72,11 +83,39 @@ public class MonsterBossWizard : Monster
     }
     private IEnumerator PatternAttributeCounter()
     {
+        Debug.Log("보스: 속성 카운터");
+
         _attributeCounter = true;
         _attributeCounterCount = _maxCount;
 
         int index = Random.Range(0, _attributes.Count);
         _attribute = _attributes[index];
+
+        _patternDone = true;
+        RandomPattern();
+        yield return null;
+    }
+
+    private IEnumerator PatternCharge()
+    {
+        Debug.Log("보스: 차지");
+
+        _chargeAttack = true;
+        _charge = Random.Range(0, 10);
+
+        _patternDone = true;
+        RandomPattern();
+        yield return null;
+    }
+
+    private IEnumerator PatternChargeAttack()
+    {
+        Debug.Log("보스: 차지 어택");
+
+        _chargeAttack = false;
+
+        var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
+        bullet.GetComponent<MonsterMagic>().Damage = 50;
 
         _patternDone = true;
         RandomPattern();
@@ -90,24 +129,15 @@ public class MonsterBossWizard : Monster
         yield return null;
     }
 
-    private IEnumerator PatternActionCounterBuff()
-    {
-        _actionCounterBuff = true;
-        _actionCounterBuffShield = 1000;
-
-        _patternDone = true;
-        RandomPattern();
-        yield return null;
-    }
 
     public override void Damage(int damage)
     {
-        Debug.Log("몬스터 : " + damage + "를 받았습니다.");
-        
         if (_attributeCounter)
         {
-            if (_attribute == "")
-            {
+            Debug.Log("보스 : " + damage + "를 받았습니다.");
+
+            // if (_attribute is "")
+            // {
                 if (Stats.Defense == 0)
                 {
                     Stats.HP -= damage;
@@ -125,20 +155,11 @@ public class MonsterBossWizard : Monster
                         Stats.HP -= damage;
                     }
                 }
-            }
-        }
-        else if (_actionCounterBuff)
-        {
-            _actionCounterBuffShield -= damage;
-
-            if (_actionCounterBuffShield <= 0)
-            {
-                _actionCounterBuffShield = 0;
-                _actionCounterBuff = false;
-            }
+            // }
         }
         else
         {
+            Debug.Log("보스 : " + damage + "를 받았습니다.");
             if (Stats.Defense == 0)
             {
                 Stats.HP -= damage;
@@ -177,6 +198,10 @@ public class MonsterBossWizard : Monster
             if (_attributeCounter)
             {
                 _attributeCounterCount -= 1;
+            }
+            if (_chargeAttack)
+            {
+                _charge -= 1;
             }
         }
     }
