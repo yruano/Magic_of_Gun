@@ -10,6 +10,7 @@ public class MonsterBossWizard : Monster
     private int _attributeCounterCount;
     private int _maxCount;
     private int _charge;
+    private int _heel;
     private List<string> _attributes;
     private string _attribute = "";
     public MonsterBossWizard()
@@ -36,6 +37,7 @@ public class MonsterBossWizard : Monster
         _charge = 0;
         _attributeCounterCount = 0;
         _maxCount = 5;
+        _heel = 5;
 
         RandomPattern();
     }
@@ -54,6 +56,18 @@ public class MonsterBossWizard : Monster
             else
             {
                 NextPattern = PatternRest;
+            }
+        }
+        else if (_attributeCounter)
+        {
+            if (_attributeCounterCount == 0)
+            {
+                _attributeCounter = false;
+                NextPattern = Patterns[randomIndex];
+            }
+            else
+            {
+                NextPattern = PatternHeel;
             }
         }
         else
@@ -108,6 +122,24 @@ public class MonsterBossWizard : Monster
         yield return null;
     }
 
+    private IEnumerator PatternHeel()
+    {
+        Debug.Log("보스: 회복");
+
+        Stats.HP += _heel;
+
+        if (Stats.HP >= Stats.MaxHP)
+        {
+            Stats.HP = Stats.MaxHP;
+        }
+
+        Debug.Log("보스의 채력은 " + Stats.HP);
+
+        _patternDone = true;
+        RandomPattern();
+        yield return null;
+    }
+
     private IEnumerator PatternChargeAttack()
     {
         Debug.Log("보스: 차지 어택");
@@ -129,7 +161,6 @@ public class MonsterBossWizard : Monster
         yield return null;
     }
 
-
     public override void Damage(int damage)
     {
         if (_attributeCounter)
@@ -138,23 +169,23 @@ public class MonsterBossWizard : Monster
 
             // if (_attribute is "")
             // {
-                if (Stats.Defense == 0)
+            if (Stats.Defense == 0)
+            {
+                Stats.HP -= damage;
+            }
+            else
+            {
+                if (Stats.Defense >= damage)
                 {
-                    Stats.HP -= damage;
+                    Stats.Defense -= damage;
                 }
                 else
                 {
-                    if (Stats.Defense >= damage)
-                    {
-                        Stats.Defense -= damage;
-                    }
-                    else
-                    {
-                        damage -= Stats.Defense;
-                        Stats.Defense = 0;
-                        Stats.HP -= damage;
-                    }
+                    damage -= Stats.Defense;
+                    Stats.Defense = 0;
+                    Stats.HP -= damage;
                 }
+            }
             // }
         }
         else
@@ -199,7 +230,7 @@ public class MonsterBossWizard : Monster
             {
                 _attributeCounterCount -= 1;
             }
-            if (_chargeAttack)
+            else if (_chargeAttack)
             {
                 _charge -= 1;
             }
