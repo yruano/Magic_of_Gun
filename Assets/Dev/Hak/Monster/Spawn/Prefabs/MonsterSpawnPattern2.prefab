@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4415944204627860222}
-  - component: {fileID: 1405174486457640878}
+  - component: {fileID: -2493851561032186097}
   m_Layer: 0
   m_Name: MonsterSpawnPattern2
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1405174486457640878
+--- !u!114 &-2493851561032186097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,19 +43,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2715648818538986089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b9a99d519a09d94989987682d3b6d48, type: 3}
+  m_Script: {fileID: 11500000, guid: f4cd59c53fae56a4d99667f05f812a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   P_Monster:
   - {fileID: 363663480162597436, guid: 19a227eb325f7654d9e7a3e665991836, type: 3}
   - {fileID: 2831289341180057623, guid: cad21b6a73a75254f8a3610d234b0664, type: 3}
-  - {fileID: 5561754952910372383, guid: 481154059bb4ae4429455bc68002bf33, type: 3}
   Pos:
   - {fileID: 2479393778035460286}
   - {fileID: 6100910629788063669}
-  SpawnMonster: []
-  Player: {fileID: 8105806792956948811, guid: e79200fdd15a389429b60d0b61fb48c0, type: 3}
-  IsTurn: 0
+  Monsters: []
 --- !u!1 &4525645680284012771
 GameObject:
   m_ObjectHideFlags: 0

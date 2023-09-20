@@ -2,30 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterSpawnAndTurn : MonoBehaviour
+public class TurnManager : MonoBehaviour
 {
-    public List<GameObject> P_Monster;
-    public List<Transform> Pos = new();
-    public List<GameObject> SpawnMonster = new();
+    public List<GameObject> Monsters;
     public GameObject Player;
     public bool IsTurn;
-
-    private void Start()
-    {
-        Spawn();
-        IsTurn = true;
-        StartTurn();
-    }
-
-    public void Spawn()
-    {
-        for (int i = 0; i < Pos.Count; i++)
-        {
-            var index = Random.Range(0, P_Monster.Count);
-            GameObject obj = Instantiate(P_Monster[index], Pos[i].position, Quaternion.identity);
-            SpawnMonster.Add(obj);
-        }
-    }
 
     public void StartTurn()
     {
@@ -38,9 +19,9 @@ public class MonsterSpawnAndTurn : MonoBehaviour
         else
         {
             Debug.Log("몬스터 턴 시작");
-            for (int i = 0; i < SpawnMonster.Count; i++)
+            for (int i = 0; i < Monsters.Count; i++)
             {
-                var turn = SpawnMonster[i].GetComponent<ITurn>();
+                var turn = Monsters[i].GetComponent<ITurn>();
                 turn?.Turn();
             }
 
@@ -57,10 +38,9 @@ public class MonsterSpawnAndTurn : MonoBehaviour
 
     private void Update()
     {
-        SpawnMonster.RemoveAll(item => item == null);
-
         if (Input.GetKeyDown(KeyCode.A))
         {
+            IsTurn = true;
             StartTurn();
         }
 
@@ -69,7 +49,7 @@ public class MonsterSpawnAndTurn : MonoBehaviour
             EndTurn();
         }
 
-        if (SpawnMonster.Count == 0)
+        if (Monsters.Count == 0)
         {
             Destroy(gameObject);
         }

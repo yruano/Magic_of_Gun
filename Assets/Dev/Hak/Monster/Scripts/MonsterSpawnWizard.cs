@@ -6,6 +6,10 @@ using UnityEngine;
 public class MonsterSpawnWizard : Monster
 {
     public GameObject P_Monster;
+    public GameObject P_Bullet;
+    public List<Transform> Pos = new();
+    public List<GameObject> SpawnMonster = new();
+
     public MonsterSpawnWizard()
     {
         Stats.DropItems = new[]
@@ -20,7 +24,7 @@ public class MonsterSpawnWizard : Monster
         Patterns.Add(PatternRest);
         Patterns.Add(PatternDefenseBuff);
         Patterns.Add(PatternHeel);
-        
+
         RandomPattern();
     }
     private void RandomPattern()
@@ -30,7 +34,6 @@ public class MonsterSpawnWizard : Monster
 
         NextPattern = Patterns[randomIndex];
     }
-
     private IEnumerator PatternDefenseBuff()
     {
         Debug.Log("방어력 강화");
@@ -40,30 +43,26 @@ public class MonsterSpawnWizard : Monster
         RandomPattern();
         yield return null;
     }
+    private IEnumerator PatternRest()
+    {
+        Debug.Log("휴식");
 
+        _patternDone = true;
+        RandomPattern();
+        yield return null;
+    }
     private IEnumerator PatternHeel()
     {
         _patternDone = true;
         RandomPattern();
         yield return null;
     }
-
-    private IEnumerator PatternRest()
-    {
-        Debug.Log("휴식");
-        
-        _patternDone = true;
-        RandomPattern();
-        yield return null;
-    }
-
     private IEnumerator PatternSpawnPreparation()
     {
         _patternDone = true;
         NextPattern = PatternSpawn;
         yield return null;
     }
-
     private IEnumerator PatternSpawn()
     {
         Instantiate(P_Monster, gameObject.transform.position, gameObject.transform.rotation);
