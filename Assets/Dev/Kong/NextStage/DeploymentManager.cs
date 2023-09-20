@@ -27,7 +27,7 @@ public class DeploymentManager : MonoBehaviour
     public List<GameObject> buttons = new List<GameObject>();
 
     //새로운 스테이지들 정보 생성
-    public List<NextStage> NewStageInfo(int minLeft, int extraLeft, int count)
+    public List<NextStage> NewStageInfo(int minLeft, int maxLeft, int count)
     {
         //초기화
         nextStage.Clear();
@@ -36,7 +36,7 @@ public class DeploymentManager : MonoBehaviour
         //요구분량만큼 생성
         while (nextStage.Count < count)
         {
-            nextStage.Add(generateStageList.nextStage(minLeft, minLeft + extraLeft));
+            nextStage.Add(generateStageList.nextStage(minLeft, maxLeft));
         }
         //반환
         return nextStage;
@@ -57,6 +57,8 @@ public class DeploymentManager : MonoBehaviour
             button.GetComponent<SpriteRenderer>().sprite = originSprites[(int)stage.type];
             //정보를 오브젝트에 입력
             button.GetComponent<StageButton>().Data = stage;
+            //정보를 기반으로 텍스트 수정
+            button.GetComponent<StageButton>().RefreshNumberInfor();
 
             //만들어진 오브젝트를 배열에 추가
             buttons.Add(button);
@@ -71,19 +73,32 @@ public class DeploymentManager : MonoBehaviour
     {
         //지금 입력된 길이 확인
         float lengthX = xMax - xMin;
-        //각각 버튼간 거리 확인, 버튼 개수 + 2(앞 뒤 거리)
-        float distance = lengthX / (buttons.Count + 2);
+        //각각 버튼간 거리 확인, 버튼 개수 + 1(앞 과의 거리)
+        float distance = lengthX / (buttons.Count + 1);
 
         for (int i = 0; i < buttons.Count; i++)
         {
             //i번째 버튼은 x시작부분에서 버튼간거리 * (i + 1)만큼 뒤로 밀리고, y높이에 위치함
             buttons[i].transform.position = new Vector3(xMin + (distance * (i + 1)), y);
+            //남은 턴수가 적힌 글씨 이동
+            buttons[i].GetComponent<StageButton>().MoveNumber();
         }
     }
 
-    //위의 절차를 
-    public void run()
+    //위의 절차를 따라서 만들고 뿌림
+    public void run(int minLeft, int maxLeft)
     {
+        //입력받은 최소 남은 거리와 준비되어있는 갯수만큼 생성
+        NewStageInfo(minLeft, maxLeft, count);
+        //오브젝트 생성
+        GenerateButton();
+        //오브젝트 위치 이동
+        Relocate();
+    }
 
+    //!!임시!! 시작해서 run을 실행시킴
+    private void Start()
+    {
+        run(6, 9);
     }
 }

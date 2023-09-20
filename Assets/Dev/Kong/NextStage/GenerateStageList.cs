@@ -11,8 +11,8 @@ public class GenerateStageList
         //정보 생성
         NextStage ret = new NextStage();
 
-        //무슨 칸인지
-        ret.type = (Type)Random.Range(0, 3);
+        //무슨 칸인지 정보 랜덤선택, 0이상 4미만
+        ret.type = (Type)Random.Range(0, 4);
 
         return ret;
     }
@@ -36,7 +36,7 @@ public class GenerateStageList
         else
         {
             //범위 내로 남은 칸 설정하고
-            ret.left = Random.Range(min, max);
+            ret.left = Random.Range(min, max+1);
         }
         //반환
         return ret;

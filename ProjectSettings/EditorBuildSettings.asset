@@ -8,5 +8,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Dev/Kong/changeTest.unity
+    guid: 8b41ec5b113f1934f83bb5ef5b06c4ac
+  - enabled: 1
+    path: Assets/Dev/Kong/NextStage.unity
+    guid: a64b8029670038449abf9f80623ba958
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 1029dd112d19d8845b68198df5cfc4b6, type: 2}

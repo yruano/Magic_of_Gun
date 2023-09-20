@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //이벤트와 상태를 중계합니다.
 public class EventBus : MonoBehaviour, ITurn
 {
-    //중립상태, 행동 취소시 진입
+    //중립상태로
     public event Action<int> Cancle;
     //에임 표식 클릭,중립 상태일 시 조준 중 상태로
     public event Action<int> ClickAim;
@@ -24,7 +24,7 @@ public class EventBus : MonoBehaviour, ITurn
 
     //현재 상태, 모든 리스너는 state를 수정해야함.
     public int State = 0;
-    //중립 상태
+    //중립 상태, 행동 취소시 진입
     public static int NEUTRAL = 0;
     //조준중 상태
     public static int AIMING = 1;

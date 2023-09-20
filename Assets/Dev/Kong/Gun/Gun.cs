@@ -105,19 +105,25 @@ public class Gun : MonoBehaviour
     public void HitTarget(int info)
     {
         //fire함수를 통해 탄창관련 처리 후 하나 받아옴
-        Bullet damage = Fire();
+        Bullet bulletData = Fire();
         //탄창이 비어 받아온게 없다면
-        if(damage == null)
+        if(bulletData == null)
         {
+            //탄창 비었다는 로그 전달
             Debug.Log($"out of ammo: {gameObject.name}");
-            //탄창 비었다는 이벤트 발생
         }
-        //비지 않았다면
+        //목표가 이런 저런 이유로 없다면
+        else if(Target == null)
+        {
+            //목표가 없다고 로그 남기기
+            Debug.Log($"No Target: {gameObject.name}");
+        }
+        //위에 해당하는 문제가 없다면
         else
         {
             Debug.Log($"{gameObject.name}: gun shoted, target: {Target.name}");
             //목표에게 데미지 전달
-            Target.GetComponent<IDamageable>().Damage(damage.Damage);
+            Target.GetComponent<IDamageable>().Damage(bulletData.Damage);
         }
     }
 

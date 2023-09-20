@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 5300259167669542247}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7747763473134306035
 SpriteRenderer:
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   st: {fileID: 0}
+  nextScene: 
 --- !u!1 &4644057411783106892
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
   mainCamera: {fileID: 0}
+  TextMesh: {fileID: 0}
 --- !u!1 &7405396729131903694
 GameObject:
   m_ObjectHideFlags: 0

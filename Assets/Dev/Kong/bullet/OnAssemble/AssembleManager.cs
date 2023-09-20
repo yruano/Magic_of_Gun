@@ -1,10 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AssembleManeger : MonoBehaviour
 {
+    //우클릭 시 슬라이더 안보이게 하기 위한 이벤트 연결용
+    public event Action RightClick;
     //유저가 선택한 탄두와 탄피
     GameObject WarHead = null;
     GameObject Cartridge = null;
@@ -79,15 +83,16 @@ public class AssembleManeger : MonoBehaviour
 
         //총알 데이터 교체
         Bullet Data = Bullet.GetComponent<Bullet>();
-        //다시 클릭되는 일을 막기 위해 collider를 제거함
-        //탄두 전달
+        //다시 클릭되는 일을 막기 위해 탄두와 탄피에 collider를 제거함
+        //탄두 오브젝트 복사및 collider제거
         GameObject tmpPointer = Instantiate(WarHead);
         Destroy(tmpPointer.GetComponent<CircleCollider2D>());
         Data.ReplaceWarHead(tmpPointer);
-        //탄피 전달
+        //탄피 오브젝트 복사및 collider제거
         tmpPointer = Instantiate(Cartridge);
         Destroy(tmpPointer.GetComponent<BoxCollider2D>());
         Data.ReplaceCartridge(tmpPointer);
+        //만들어진 총알 객체 색깔 새로고침
         Data.ColorRefresh();
     }
 
@@ -104,5 +109,20 @@ public class AssembleManeger : MonoBehaviour
         AssembledBullet.Add(newBullet);
         //무한 복제를 막기위해 정보를 전달하는 컴포넌트를 제거함
         Destroy(newBullet.GetComponent<BulletOnAssemble>());
+
+        //슬라이더 객체 관리 컴포넌트 추가
+        newBullet.AddComponent<BulletSlider>();
+
+    }
+    //마우스 오른쪽 클릭을 받기위한 함수
+    public void Update()
+    {
+        //마우스 우클릭 시
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.Log("우클릭 감지");
+            //이벤트에 연결된 리스너들 호출함
+            RightClick?.Invoke();
+        }
     }
 }

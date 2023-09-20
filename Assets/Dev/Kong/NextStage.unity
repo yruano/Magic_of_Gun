@@ -384,6 +384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: System
       objectReference: {fileID: 0}
+    - target: {fileID: 9206188400669949142, guid: 25fb92960fba2d2498633668566259d7, type: 3}
+      propertyPath: count
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -401,6 +405,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sample Stage
       objectReference: {fileID: 0}
+    - target: {fileID: 4644057411783106892, guid: e3d507e26c6904c4490776db82146086, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184689354335441369, guid: e3d507e26c6904c4490776db82146086, type: 3}
+      propertyPath: nextScene
+      value: changeTest
+      objectReference: {fileID: 0}
+    - target: {fileID: 7405396729131903694, guid: e3d507e26c6904c4490776db82146086, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8505021042849339952, guid: e3d507e26c6904c4490776db82146086, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -411,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8505021042849339952, guid: e3d507e26c6904c4490776db82146086, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8505021042849339952, guid: e3d507e26c6904c4490776db82146086, type: 3}
       propertyPath: m_LocalPosition.z

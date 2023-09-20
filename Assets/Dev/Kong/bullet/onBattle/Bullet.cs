@@ -20,6 +20,9 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     //탄피 오브젝트 연결
     public GameObject CartridgeCase = null;
+    [SerializeField]
+    //내부 화약량 데이터, 0~1
+    public float charge = 0;
 
     public void Start()
     {
@@ -27,7 +30,6 @@ public class Bullet : MonoBehaviour
         ConnecetChild();
         //색깔 변경
         ColorRefresh();
-        
     }
     public void ConnecetChild()
     {
