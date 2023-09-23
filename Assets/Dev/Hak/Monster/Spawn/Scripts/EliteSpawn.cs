@@ -20,7 +20,9 @@ public class EliteSpawn : MonoBehaviour
         Monsters.Add(obj);
 
         GameObject spawn = Instantiate(P_Spawn, P_Spawn.transform.position, Quaternion.identity);
-        spawn.GetComponent<MonsterSpawn>().Monsters = Monsters;
+        spawn.GetComponent<KnightSpawn>().Monsters = Monsters;
+
+        obj.GetComponent<MonsterSpawnWizard>().KnightSpawn = spawn.GetComponent<KnightSpawn>();
     }
 
     private void Update()

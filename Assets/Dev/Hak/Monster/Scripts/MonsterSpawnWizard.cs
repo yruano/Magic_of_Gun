@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class MonsterSpawnWizard : Monster
 {
-    public GameObject P_Monster;
     public GameObject P_Bullet;
-    public List<Transform> Pos = new();
-    public List<GameObject> SpawnMonster = new();
+    public KnightSpawn KnightSpawn;
+    private string SpawnState;
+    private int PatternCount;
 
     public MonsterSpawnWizard()
     {
@@ -19,12 +19,14 @@ public class MonsterSpawnWizard : Monster
     }
     private void Start()
     {
-        Weights = new List<int> { 5, 3, 2 };
+        PatternCount = 5;
+        Weights = new List<int> { 5, 4, 1 };
 
         Patterns.Add(PatternRest);
         Patterns.Add(PatternDefenseBuff);
         Patterns.Add(PatternHeel);
 
+        SpawnState = "Impossible";
         RandomPattern();
     }
     private void RandomPattern()
@@ -32,7 +34,21 @@ public class MonsterSpawnWizard : Monster
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();
 
-        NextPattern = Patterns[randomIndex];
+        if (SpawnState == "Impossible")
+        {
+            PatternCount -= 1;
+            NextPattern = Patterns[randomIndex];
+        }
+        else
+        {
+            NextPattern = Patterns[randomIndex];
+        }
+
+        if (KnightSpawn.Monsters.Count == 1)
+        {
+            SpawnState = "possible";
+        }
+
     }
     private IEnumerator PatternDefenseBuff()
     {
@@ -53,22 +69,21 @@ public class MonsterSpawnWizard : Monster
     }
     private IEnumerator PatternHeel()
     {
+        Debug.Log("힐");
+
+        // var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
+        // bullet.GetComponent<MonsterMagic>().Heel = Stats.Damage;
+
         _patternDone = true;
         RandomPattern();
         yield return null;
     }
-    private IEnumerator PatternSpawnPreparation()
-    {
-        _patternDone = true;
-        NextPattern = PatternSpawn;
-        yield return null;
-    }
     private IEnumerator PatternSpawn()
     {
-        Instantiate(P_Monster, gameObject.transform.position, gameObject.transform.rotation);
+        KnightSpawn.Spawn();
 
         _patternDone = true;
-        NextPattern = PatternDefenseBuff;
+        RandomPattern();
         yield return null;
     }
 }
