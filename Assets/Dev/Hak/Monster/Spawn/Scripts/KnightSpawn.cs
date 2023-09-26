@@ -17,13 +17,8 @@ public class KnightSpawn : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void Done()
     {
-        Monsters.RemoveAll(item => item == null);
-
-        if (Monsters.Count == 0)
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

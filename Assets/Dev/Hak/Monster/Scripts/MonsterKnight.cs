@@ -15,7 +15,7 @@ public class MonsterKnight : Monster
 
     private void Start()
     {
-        Weights = new List<int> { 2, 8 };
+        Weights = new List<int> { 1, 9 };
 
         Patterns.Add(PatternAttack);
         Patterns.Add(PatternRest);
@@ -28,7 +28,7 @@ public class MonsterKnight : Monster
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();
 
-        NextPattern = Patterns[randomIndex];
+        _nextPattern = Patterns[randomIndex];
     }
 
     private IEnumerator PatternAttack()

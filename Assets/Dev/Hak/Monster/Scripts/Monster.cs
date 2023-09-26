@@ -27,20 +27,19 @@ public class MonsterStats
 }
 public class Monster : MonoBehaviour, IDamageable, ITurn
 {
-    protected Func<IEnumerator> NextPattern;
-    protected Coroutine CurrentPattern = null;
+    protected Func<IEnumerator> _nextPattern;
+    protected Coroutine _currentPattern = null;
     protected bool _patternDone = true;
     public List<Func<IEnumerator>> Patterns = new();
     public List<int> Weights = new();
-
     public MonsterStats Stats = new();
 
     protected virtual void Update()
     {
-        if (_patternDone is true && NextPattern is not null && Input.GetKeyDown(KeyCode.W))
+        if (_patternDone is true && _nextPattern is not null && Input.GetKeyDown(KeyCode.W))
         {
             _patternDone = false;
-            CurrentPattern = StartCoroutine(NextPattern());
+            _currentPattern = StartCoroutine(_nextPattern());
         }
     }
 
@@ -89,10 +88,10 @@ public class Monster : MonoBehaviour, IDamageable, ITurn
 
     public virtual void Turn()
     {
-        if (_patternDone is true && NextPattern is not null)
+        if (_patternDone is true && _nextPattern is not null)
         {
             _patternDone = false;
-            CurrentPattern = StartCoroutine(NextPattern());
+            _currentPattern = StartCoroutine(_nextPattern());
         }
     }
 }

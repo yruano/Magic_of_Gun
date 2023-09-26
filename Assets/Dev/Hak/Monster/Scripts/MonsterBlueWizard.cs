@@ -31,7 +31,7 @@ public class MonsterBlueWizard : Monster
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();
 
-        NextPattern = Patterns[randomIndex];
+        _nextPattern = Patterns[randomIndex];
     }
 
     private IEnumerator PatternAttack()

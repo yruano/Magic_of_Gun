@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: -1656075164432925142}
   m_Layer: 0
   m_Name: SpawnWizard
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,7 +117,7 @@ Transform:
   m_Children:
   - {fileID: 3089255415546926167}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &-4046327080172915240
 BoxCollider2D:
@@ -162,7 +162,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &7751156874427661383
 MonoBehaviour:
@@ -182,7 +182,7 @@ MonoBehaviour:
     Damage: 10
     Defense: 0
     MaxHP: 500
-  P_Bullet: {fileID: 5997588116107216800, guid: c5454cac5b6b7d24c813f05f099c16c4, type: 3}
+  P_Bullet: {fileID: 2708131485409969150, guid: 7004bd5cb1b99ac4caac632a6f5cd2e1, type: 3}
   KnightSpawn: {fileID: 0}
 --- !u!114 &-1656075164432925142
 MonoBehaviour:

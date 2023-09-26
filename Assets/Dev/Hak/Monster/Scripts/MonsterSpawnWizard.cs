@@ -7,8 +7,9 @@ public class MonsterSpawnWizard : Monster
 {
     public GameObject P_Bullet;
     public KnightSpawn KnightSpawn;
-    private string SpawnState;
-    private int PatternCount;
+    private string _spawnState;
+    private int _patternCount;
+    private bool _knightLive;
 
     public MonsterSpawnWizard()
     {
@@ -19,14 +20,14 @@ public class MonsterSpawnWizard : Monster
     }
     private void Start()
     {
-        PatternCount = 5;
+        _patternCount = 5;
         Weights = new List<int> { 5, 4, 1 };
 
         Patterns.Add(PatternRest);
         Patterns.Add(PatternDefenseBuff);
         Patterns.Add(PatternHeel);
 
-        SpawnState = "Impossible";
+        _spawnState = "Impossible";
         RandomPattern();
     }
     private void RandomPattern()
@@ -34,21 +35,20 @@ public class MonsterSpawnWizard : Monster
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();
 
-        if (SpawnState == "Impossible")
+        if (_spawnState == "Impossible")
         {
-            PatternCount -= 1;
-            NextPattern = Patterns[randomIndex];
+            _patternCount -= 1;
+            _nextPattern = Patterns[randomIndex];
         }
         else
         {
-            NextPattern = Patterns[randomIndex];
+            _nextPattern = PatternSpawn;
         }
 
-        if (KnightSpawn.Monsters.Count == 1)
+        if (_patternCount < 0)
         {
-            SpawnState = "possible";
+            _spawnState = "possible";
         }
-
     }
     private IEnumerator PatternDefenseBuff()
     {
@@ -71,8 +71,8 @@ public class MonsterSpawnWizard : Monster
     {
         Debug.Log("힐");
 
-        // var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
-        // bullet.GetComponent<MonsterMagic>().Heel = Stats.Damage;
+        var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
+        bullet.GetComponent<MonsterMagic>().Heel = Stats.Damage;
 
         _patternDone = true;
         RandomPattern();
@@ -80,10 +80,43 @@ public class MonsterSpawnWizard : Monster
     }
     private IEnumerator PatternSpawn()
     {
+        Debug.Log("나이트 소환");
         KnightSpawn.Spawn();
 
         _patternDone = true;
         RandomPattern();
         yield return null;
+    }
+
+    public override void Damage(int damage)
+    {
+        Debug.Log("몬스터 : " + damage + "를 받았습니다.");
+
+        if (Stats.Defense == 0)
+        {
+            Stats.HP -= damage;
+        }
+        else
+        {
+            if (Stats.Defense >= damage)
+            {
+                Stats.Defense -= damage;
+            }
+            else
+            {
+                damage -= Stats.Defense;
+                Stats.Defense = 0;
+                Stats.HP -= damage;
+            }
+        }
+
+        Debug.Log("몬스터 남은 Defense : " + Stats.Defense);
+        Debug.Log("몬스터 남은 HP : " + Stats.HP);
+
+        if (Stats.HP <= 0)
+        {
+            KnightSpawn.Done();
+            Destroy(gameObject);
+        }
     }
 }

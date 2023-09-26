@@ -37,7 +37,7 @@ public class MonsterBrownWizard : Monster
 
         Patterns.Add(PatternRest);
         Patterns.Add(PatternDefenseBuff);
-        NextPattern = PatternCounterAttack;
+        _nextPattern = PatternCounterAttack;
     }
 
     private void RandomPattern()
@@ -45,7 +45,7 @@ public class MonsterBrownWizard : Monster
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();
 
-        NextPattern = Patterns[randomIndex];
+        _nextPattern = Patterns[randomIndex];
     }
 
     private IEnumerator PatternCounterAttack()
@@ -66,7 +66,7 @@ public class MonsterBrownWizard : Monster
         _patternCount = 0;
 
         _patternDone = true;
-        NextPattern = PatternCounterAttack;
+        _nextPattern = PatternCounterAttack;
         yield return null;
     }
 
@@ -76,7 +76,7 @@ public class MonsterBrownWizard : Monster
         Stats.Defense += 5;
 
 
-        if (_maxCount == _patternCount) { NextPattern = PatternAttack; }
+        if (_maxCount == _patternCount) { _nextPattern = PatternAttack; }
         else { RandomPattern(); }
         _patternCount += 1;
 
@@ -89,7 +89,7 @@ public class MonsterBrownWizard : Monster
         Debug.Log("몬스터: 휴식");
 
 
-        if (_maxCount == _patternCount) { NextPattern = PatternAttack; }
+        if (_maxCount == _patternCount) { _nextPattern = PatternAttack; }
         else { RandomPattern(); }
         _patternCount += 1;
 
