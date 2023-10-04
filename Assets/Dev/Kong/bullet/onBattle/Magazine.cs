@@ -44,7 +44,7 @@ public class Magazine : MonoBehaviour
     //방아쇠 클릭 이벤트 발생시 호출되어야함, 오브젝트가 숨겨지고, 클릭 이벤트를 받지 못하게만듬
     public void Hide(int info)
     {
-        //클릭 못하게됨         ~~Collider2D 는 Collider2D를 상속받음
+        //클릭 못하게됨         Collider2D 는 업캐스팅 해서 가져오는거임
         gameObject.GetComponent<Collider2D>().enabled = false;
         //렌더러도 다 끔 childRenderers는 부모 + 자식 +자식의 자식까지 다 포함한 정보임.
         foreach (Renderer childRenderer in childRenderers)
@@ -56,7 +56,7 @@ public class Magazine : MonoBehaviour
     //플레이어 턴 이벤트 발생시 호출되어야함, 숨겨진 오브젝트가 드러나야함, 클릭 이벤트를 받아야함
     public void Show()
     {
-        //클릭 가능하게됨       ~~Collider2D 는 Collider2D를 상속받음
+        //클릭 가능하게됨       Collider2D 는 업캐스팅 해서 가져오는거임
         gameObject.GetComponent<Collider2D>().enabled = true;
         //렌더러도 다 켬 childRenderers는 부모 + 자식 +자식의 자식까지 다 포함한 정보임.
         foreach (Renderer childRenderer in childRenderers)
@@ -71,11 +71,6 @@ public class Magazine : MonoBehaviour
         //로그발생
         Debug.Log($"Magazine Clicked: {gameObject.name}");
         eventBus.PublishClickMagazineEvent(gameObject);
-
-        //!!디버그용 총알 색깔 새로고침 하라고 지침내림!!
-        foreach(Bullet bullet in bullets)
-            bullet.ColorRefresh();
-
     }
 
 

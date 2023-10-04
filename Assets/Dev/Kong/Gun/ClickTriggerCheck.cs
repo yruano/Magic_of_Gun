@@ -1,16 +1,16 @@
 using UnityEngine;
 
-//장전 확정을 위한 이벤트 발생 담당
-public class Slide : MonoBehaviour
+//트리거 클릭시 이벤트 발생 담당 
+public class ClickTriggerCheck : MonoBehaviour
 {
     //이벤트 구독 위해 이벤트 버스 레퍼런스 연결
     public EventBus eventBus = null;
 
     private void OnEnable()
     {
-        //이벤트 버스가 미리 연결 안되어있다면
-        if (eventBus == null)
-            //이벤트 버스 연결
+        //이벤트 버스 연결 안되어있다면
+        if (eventBus == null) 
+            //이벤트 버스 연결 
             eventBus = FindObjectOfType<EventBus>();
     }
 
@@ -18,8 +18,8 @@ public class Slide : MonoBehaviour
     private void OnMouseDown()
     {
         //로그에 클릭된걸 남기고
-        Debug.Log($"{name}: Slide clicked");
+        Debug.Log($"{name}: trigger clicked.");
         //이벤트 발생 요청
-        eventBus.PublishClickLoadConfirmedEvent(0);
+        eventBus.PublishClickTrigerEvent(0);
     }
 }

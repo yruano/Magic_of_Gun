@@ -9,7 +9,8 @@ public class BulletOnAssemble : MonoBehaviour
 
     public void Awake()
     {
-        AM = FindObjectOfType<AssembleManeger>();
+        if(AM == null) 
+            AM = FindObjectOfType<AssembleManeger>();
     }
     private void OnMouseDown()
     {

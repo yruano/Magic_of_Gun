@@ -48,6 +48,8 @@ public class BulletSlider : MonoBehaviour
         {
             //슬라이더를 비 활성화 시킴
             slider.SetActive(false);
+            //데이터 이동
+            TransferValue();
 
         }
     }
@@ -61,8 +63,6 @@ public class BulletSlider : MonoBehaviour
         Vector3 tmpPosition = transform.position;
         //살짝 아래로 옮겨서 오브젝트와 겹치지 않도록 함
         tmpPosition.y -= 1f;
-        //--canvas를 옮기려고 했는데 이게 움직이면 다른 것도 안움직임, 나중에 개선 가능하면 수정하길..
-        //slider.GetComponent<RectTransform>().position = mainCamera.WorldToScreenPoint(tmpPosition);
         slider.transform.Find("Slider").GetComponent<RectTransform>().position = mainCamera.WorldToScreenPoint(tmpPosition);
     }
 

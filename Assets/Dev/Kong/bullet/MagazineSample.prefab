@@ -135,6 +135,7 @@ MonoBehaviour:
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   Warhead: {fileID: 0}
   CartridgeCase: {fileID: 0}
+  charge: 0
 --- !u!1 &1219414151454912389
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +187,7 @@ MonoBehaviour:
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   Warhead: {fileID: 0}
   CartridgeCase: {fileID: 0}
+  charge: 0
 --- !u!1 &1388955966193433267
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,8 +282,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5238789944854755831}
   - component: {fileID: 5442443570102619760}
-  - component: {fileID: 4203724215947135407}
   - component: {fileID: 2589696733653495985}
+  - component: {fileID: -1132478312592253284}
   m_Layer: 0
   m_Name: MagazineSample
   m_TagString: Untagged
@@ -352,18 +354,39 @@ SpriteRenderer:
   m_SortingLayerID: -303801503
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c202aaddb67b8a4e80eba3c1a34c920, type: 3}
+  m_Sprite: {fileID: -753645907, guid: 3c202aaddb67b8a4e80eba3c1a34c920, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.66, y: 1.08}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4203724215947135407
+--- !u!114 &2589696733653495985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670603914021542871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1904e3e77c207648b3d2d56de6db127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullets:
+  - {fileID: 6146757833821125414}
+  - {fileID: 3938341876804545924}
+  - {fileID: 5240233459810856180}
+  - {fileID: 8021603031523508333}
+  - {fileID: 3650846361151622297}
+  - {fileID: 1938607927688842805}
+  - {fileID: 5118790747729533715}
+  eventBus: {fileID: 0}
+--- !u!61 &-1132478312592253284
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -399,36 +422,15 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.92, y: 1.92}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 0.66, y: 1.08}
+    newSize: {x: 0.66, y: 1.08}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.92, y: 1.92}
+  m_Size: {x: 0.66, y: 1.08}
   m_EdgeRadius: 0
---- !u!114 &2589696733653495985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670603914021542871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1904e3e77c207648b3d2d56de6db127, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullets:
-  - {fileID: 6146757833821125414}
-  - {fileID: 3938341876804545924}
-  - {fileID: 5240233459810856180}
-  - {fileID: 8021603031523508333}
-  - {fileID: 3650846361151622297}
-  - {fileID: 1938607927688842805}
-  - {fileID: 5118790747729533715}
-  eventBus: {fileID: 0}
 --- !u!1 &1957285861645581548
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +986,7 @@ MonoBehaviour:
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   Warhead: {fileID: 0}
   CartridgeCase: {fileID: 0}
+  charge: 0
 --- !u!1 &4337527544968406900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1122,7 @@ MonoBehaviour:
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   Warhead: {fileID: 0}
   CartridgeCase: {fileID: 0}
+  charge: 0
 --- !u!1 &5446657800456279949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,6 +1258,7 @@ MonoBehaviour:
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   Warhead: {fileID: 0}
   CartridgeCase: {fileID: 0}
+  charge: 0
 --- !u!1 &6538368977282364547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1557,6 +1562,7 @@ MonoBehaviour:
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   Warhead: {fileID: 0}
   CartridgeCase: {fileID: 0}
+  charge: 0
 --- !u!1 &8228113061790381366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,6 +1614,7 @@ MonoBehaviour:
   warHeadColor: {r: 1, g: 0.84313726, b: 0, a: 1}
   Warhead: {fileID: 0}
   CartridgeCase: {fileID: 0}
+  charge: 0
 --- !u!1 &9091833589946756935
 GameObject:
   m_ObjectHideFlags: 0

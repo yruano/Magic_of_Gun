@@ -12,14 +12,12 @@ public class Pistol : Gun
         BulletPerTrun = MaxMagazine;
         //탄창 초기화
         Magazine.Clear();
-        //집중 미사용
-        Focus = false;
         //고장확률은 아직 미정이니 0
         JamChance = 0;
         
     }
     //총알 스프라이트의 위치를 조정함.
-    new public void MoveBulletSprite()
+    public override void MoveBulletSprite()
     {
         for (int i = 0; i < bulletSprite.Count; i++)
             //좌표 설정

@@ -45,9 +45,8 @@ public class EventBus : MonoBehaviour, ITurn
     }
 
     //에임 클릭 이벤트 발생 중개
-    public bool PublishClickAimEvent(int info)
+    public void PublishClickAimEvent(int info)
     {
-        //상태 확인, switch-case문은 static변수를 사용할 수 없으므로 if-else문으로 작성
         //장전하지 않았고, 중립 상태이거나 목표 지정 상태일 시
         if (reloaded == false && State == NEUTRAL || State == SELECT_TARGET)
         {
@@ -55,12 +54,7 @@ public class EventBus : MonoBehaviour, ITurn
             State = AIMING;
             //이벤트 발생
             ClickAim?.Invoke(info);
-            //이벤트가 발생 되었다고 호출한곳에 전달
-            return true;
         }
-        //else //이벤트가 발생할 상태가 아니라면
-        //이벤트가 발생되지 않았다고 호출한곳에 전달
-        return false;
     }
 
     //몬스터 클릭 이벤트 발생 중개
@@ -71,7 +65,7 @@ public class EventBus : MonoBehaviour, ITurn
         {
             //목표 지정 상태로 변경
             State = SELECT_TARGET;
-            //클릭한 오브젝트를 구독한 메소드들에게 전달함
+            //이벤트 발생
             ClickMonster?.Invoke(target);
         }
     }
@@ -120,6 +114,7 @@ public class EventBus : MonoBehaviour, ITurn
     {
         PlayerTurn?.Invoke();
     }
+    //인터페이스를 위한 우회함수
     public void Turn()
     {
         PublishPlayerTurnEvent();
@@ -150,14 +145,13 @@ public class EventBus : MonoBehaviour, ITurn
             //플레이어 턴 이벤트 발생
             PlayerTurn?.Invoke();
         }
-
-
     }
 
     //PlayerTurn 발생시 초기화 하기 위해 이벤트 구독
     public void Start()
     {
         PlayerTurn += Initial;
+        Initial();
     }
 
     //초기화, 중립이벤트 발생시키고 아무것도 하지않은 상태로 수정
@@ -169,5 +163,4 @@ public class EventBus : MonoBehaviour, ITurn
         //초기화를 하기위해 중립상태 이벤트 발생, 자동 호출임을 나타내기 위해 음수로.
         Cancle?.Invoke(-1);
     }
-
 }

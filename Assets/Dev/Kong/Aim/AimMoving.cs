@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
-//에임의 상태 전환과 그에 따른 움직임을 주관
+//에임과 관련된 상태 전환과 그 움직임을 담당
 public class AimMoving : MonoBehaviour
 {
     [SerializeField]
@@ -14,6 +11,8 @@ public class AimMoving : MonoBehaviour
     public GameObject gun = null;
     //마우스를 따라다니게 위해 연결
     public FollowMouse followMouse = null;
+    //에임의 중립위치, 총 기준으로 어디위치인가, 기본값 3, 2는 권총기준
+    public Vector2 offset = new Vector2(3f, 2f);
 
     //초기화
     private void Awake()
@@ -63,7 +62,7 @@ public class AimMoving : MonoBehaviour
 
     }
     
-    //중립 상태때 호출되어야함, 총구 위치로 이동!!(현재 위치는 임시지정임)!!
+    //중립 상태때 호출되어야함, 총구 위치로 이동 !!(현재 위치는 임시지정임)!!
     public void ToGun(int info)
     {
         //이번턴에 장전했다면
@@ -71,12 +70,12 @@ public class AimMoving : MonoBehaviour
             //아무것도 하지않고 종료
             return;
 
-        //다시 에임이 클릭될수 있도록 colider를 켬
+        //다시 에임객체가 클릭 될 수 있도록 colider를 켬
         GetComponent<CircleCollider2D>().enabled = true;
         //총의 위치를 찾아
         Vector3 TargetPosition = gun.transform.position;
-        //적절한 위치로 이동
-        transform.position = new Vector3(TargetPosition.x + 3, TargetPosition.y + 2);
+        //기록해둔 위치로 이동
+        transform.position = new Vector3(TargetPosition.x + offset.x, TargetPosition.y + offset.y);
     }
     
     //조준중 상태일 때 호출되어야함, 마우스 위치로 이동하는 스크립트를 켬.
@@ -100,16 +99,16 @@ public class AimMoving : MonoBehaviour
     //탄창 교체 확정 이벤트 발생시 호출되어야함, 오브젝트가 숨겨지고, 클릭 이벤트를 받지 못하게만듬
     public void Hide(int info)
     {
-        //오브젝트가 숨겨짐,    SpriteRenderer는 Renderer를 상속받음
-        gameObject.GetComponent<Renderer>().enabled = false;
-        //클릭 못하게됨         CircleCollider2D 는 Collider2D를 상속받음
-        gameObject.GetComponent<Collider2D>().enabled = false;
+        //오브젝트가 숨겨짐
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        //클릭 못하게됨
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
     }
 
     //플레이어 턴 이벤트 발생시 호출되어야함, 숨겨진 오브젝트가 드러나야함
     public void Show()
     {
-        //오브젝트가 다시 드러남SpriteRenderer는 Renderer를 상속받음
-        gameObject.GetComponent<Renderer>().enabled = true;
+        //오브젝트가 다시 드러남
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 }

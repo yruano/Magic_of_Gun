@@ -48,17 +48,23 @@ public class DeploymentManager : MonoBehaviour
     {
         //초기화
         buttons.Clear();
+        //몇번째 객체인지 기록용 변수
+        int i = 1;
         foreach (var stage in nextStage)
         {
             //지금 만드는 버튼 
             GameObject button = Instantiate(prefeb);
 
+            //앞으로 계속 수정할 버튼 스프라이트를 참조변수에 연결
+            StageButton stageButton = button.GetComponent<StageButton>();
             //정보에 맞게 버튼 스프라이트 수정
             button.GetComponent<SpriteRenderer>().sprite = originSprites[(int)stage.type];
             //정보를 오브젝트에 입력
-            button.GetComponent<StageButton>().Data = stage;
+            stageButton.Data = stage;
             //정보를 기반으로 텍스트 수정
-            button.GetComponent<StageButton>().RefreshNumberInfor();
+            stageButton.RefreshNumberInfor();
+            //이름에 몇번째인지 기록함
+            button.name = "Stage_Button_" + i++;
 
             //만들어진 오브젝트를 배열에 추가
             buttons.Add(button);
@@ -73,15 +79,13 @@ public class DeploymentManager : MonoBehaviour
     {
         //지금 입력된 길이 확인
         float lengthX = xMax - xMin;
-        //각각 버튼간 거리 확인, 버튼 개수 + 1(앞 과의 거리)
+        //각각 버튼간 거리 확인, 버튼 개수 + 1(화면 앞 끝 과의 거리)
         float distance = lengthX / (buttons.Count + 1);
 
         for (int i = 0; i < buttons.Count; i++)
         {
             //i번째 버튼은 x시작부분에서 버튼간거리 * (i + 1)만큼 뒤로 밀리고, y높이에 위치함
             buttons[i].transform.position = new Vector3(xMin + (distance * (i + 1)), y);
-            //남은 턴수가 적힌 글씨 이동
-            buttons[i].GetComponent<StageButton>().MoveNumber();
         }
     }
 

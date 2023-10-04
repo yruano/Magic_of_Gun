@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PistolMagazine : Magazine
 {
+    //초기화
     new public void Start()
     {
         base.Start();
-        //플레이어 턴 때 위치 잡도록
+        //플레이어 턴 때 위치 잡도록 이벤트 연결
         eventBus.PlayerTurn += LocationBullets;
-        //시작할 때 위치 잡도록
+        //시작할 때 탄창 내부 총알 위치 잡음.
         LocationBullets();
     }
+
     //권총의 탄창 내부 총알 위치를 잡음
     public void LocationBullets()
     {

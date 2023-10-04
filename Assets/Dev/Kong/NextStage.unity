@@ -405,18 +405,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sample Stage
       objectReference: {fileID: 0}
-    - target: {fileID: 4644057411783106892, guid: e3d507e26c6904c4490776db82146086, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5184689354335441369, guid: e3d507e26c6904c4490776db82146086, type: 3}
-      propertyPath: nextScene
-      value: changeTest
-      objectReference: {fileID: 0}
-    - target: {fileID: 7405396729131903694, guid: e3d507e26c6904c4490776db82146086, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 8505021042849339952, guid: e3d507e26c6904c4490776db82146086, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -460,22 +448,6 @@ PrefabInstance:
     - target: {fileID: 8505021042849339952, guid: e3d507e26c6904c4490776db82146086, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514633849307675450, guid: e3d507e26c6904c4490776db82146086, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 24.9536
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514633849307675450, guid: e3d507e26c6904c4490776db82146086, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 24.0899
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514633849307675450, guid: e3d507e26c6904c4490776db82146086, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -15.8232
-      objectReference: {fileID: 0}
-    - target: {fileID: 8514633849307675450, guid: e3d507e26c6904c4490776db82146086, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -7.955
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -26,28 +26,32 @@ public class Bullet : MonoBehaviour
 
     public void Start()
     {
-        //자식 오브젝트 연결
-        ConnecetChild();
-        //색깔 변경
+        //만약 자식이 연결되어있지 않다면
+        if(Warhead == null || CartridgeCase == null)
+            //자식 오브젝트 연결
+            ConnecetChild();
+        //색깔 반영
         ColorRefresh();
     }
+    //자식오브젝트가 연결되어 있지 않다면 가장 위에있는 탄두와 탄피를 골라 연결
     public void ConnecetChild()
     {
         //자식 오브젝트 연결
         for (int i = 0; i < transform.childCount; i++)
         {
             //탄두 오브젝트는
-            if (transform.GetChild(i).gameObject.tag == "WarHead")
+            if (Warhead == null && transform.GetChild(i).gameObject.tag == "WarHead")
             {
                 //탄두랑 연결
                 Warhead = transform.GetChild(i).gameObject;
             }
             //탄피 오브젝트는
-            else if (transform.GetChild(i).gameObject.tag == "CartridgeCase")
+            else if (CartridgeCase == null && transform.GetChild(i).gameObject.tag == "CartridgeCase")
             {
                 //탄피랑 연결
                 CartridgeCase = transform.GetChild(i).gameObject;
             }
+
             //둘 다 연결 됐으면 반복문 종료
             if (Warhead != null && CartridgeCase != null) 
                 break;
@@ -76,7 +80,8 @@ public class Bullet : MonoBehaviour
             //기존 오브젝트 삭제
             Destroy(Warhead);
         }
-        //새로 입력받은 오브젝트로 교체
+
+        //새로 입력받은 오브젝트를 연결
         Warhead = newWarhead;
         //자식으로 등록
         Warhead.transform.SetParent(transform);

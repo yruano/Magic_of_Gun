@@ -21,7 +21,7 @@ public class AssembleManeger : MonoBehaviour
     //조립된 총알을 저장할곳
     List<GameObject> AssembledBullet = new List<GameObject>();
 
-    //선택한 객체를 x축을 기준으로 이동시킴
+    //선택한 탄두-탄피 객체를 x축을 기준으로 이동시킴
     private void MoveObjectX(GameObject Object, int distance)
     {
         //임시 저장용 변수
@@ -34,7 +34,7 @@ public class AssembleManeger : MonoBehaviour
         Object.transform.position = tmpPosition;
     }
 
-    //플레이어가 새로운 탄두를 선택함
+    //플레이어가 새로운 탄두를 선택한 상황 대응
     public void SelectWarHead(GameObject WarHead)
     {
         //기존 선택한 객체가 있었다면
@@ -45,7 +45,7 @@ public class AssembleManeger : MonoBehaviour
         }
         //선택한 객체 교체
         this.WarHead = WarHead;
-        //객체 이동
+        //객체를 선택한 객체위치로 이동
         MoveObjectX(WarHead, 1);
 
         //총알 조립 요청
@@ -62,7 +62,7 @@ public class AssembleManeger : MonoBehaviour
         }
         //선택한 객체 교체
         Cartridge = cartridge;
-        //객체 이동
+        //객체를 선택한 객체위치로 이동
         MoveObjectX(Cartridge, -1);
 
         //총알 조립 요청
@@ -76,15 +76,16 @@ public class AssembleManeger : MonoBehaviour
         if(WarHead == null || Cartridge == null)
             //실행하지 않음
             return;
-        //총알이 생성되지 않았다면
+        //총알이 생성되지 않은 상태라면
         if (Bullet == null)
             //총알 생성
             Bullet = Instantiate(prefab);
 
         //총알 데이터 교체
         Bullet Data = Bullet.GetComponent<Bullet>();
+
         //다시 클릭되는 일을 막기 위해 탄두와 탄피에 collider를 제거함
-        //탄두 오브젝트 복사및 collider제거
+        //탄두 오브젝트 복사 및 collider제거
         GameObject tmpPointer = Instantiate(WarHead);
         Destroy(tmpPointer.GetComponent<CircleCollider2D>());
         Data.ReplaceWarHead(tmpPointer);
@@ -101,18 +102,18 @@ public class AssembleManeger : MonoBehaviour
     {
         //위치이동
         Vector3 tmpPosition = newBullet.transform.position;
+        //개수마다 다른 x축 위치를 위한 부분
         tmpPosition.x = -9.5f + (1.5f * AssembledBullet.Count);
         tmpPosition.y = -4;
         newBullet.transform.position = tmpPosition;
 
         //리스트에 추가
         AssembledBullet.Add(newBullet);
-        //무한 복제를 막기위해 정보를 전달하는 컴포넌트를 제거함
+        //무한 복제를 막기위해 매니저에게 정보를 전달하는 컴포넌트를 제거함
         Destroy(newBullet.GetComponent<BulletOnAssemble>());
 
         //슬라이더 객체 관리 컴포넌트 추가
         newBullet.AddComponent<BulletSlider>();
-
     }
     //마우스 오른쪽 클릭을 받기위한 함수
     public void Update()

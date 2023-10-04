@@ -1,7 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//랜덤으로 다음칸 후보를 만드는 애
+//버튼의 정보 생성 담당
+
+//버튼이 가질 수 있는 타입 종류
+public enum Type
+{
+    Rest, Shop, Battle, Inconter
+}
+
+//버튼을 만들 떄 필요한 데이터를 저장하는 구조체
+public struct NextStage
+{
+    //종류
+    public Type type;
+    //보스까지 몇칸 남았는지
+    public int left;
+}
+
+//랜덤으로 다음칸 후보를 만듦
 public class GenerateStageList
 {
 
@@ -42,16 +59,4 @@ public class GenerateStageList
         return ret;
     }
 
-}
-
-public enum Type
-{
-    Rest, Shop, Battle, Inconter
-}
-public struct NextStage
-{
-    //종류
-    public Type type;
-    //보스까지 몇칸 남았는지
-    public int left;
 }

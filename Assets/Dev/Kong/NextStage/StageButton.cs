@@ -10,7 +10,7 @@ public class StageButton : MonoBehaviour
 {
     //보스층까지 필요한 턴 수 표시하는 글자
     [SerializeField]
-    StageText st = null;
+    TMP_Text st = null;
     //생성시 필요한 정보를 가지는곳
     [SerializeField]
     public NextStage Data;
@@ -21,32 +21,15 @@ public class StageButton : MonoBehaviour
     //초기화
     public void Awake()
     {
-        //컴포넌트 연결
-        st = GetComponentInChildren<StageText>();
-    }
-
-    //글자 위치 다시잡기용 
-    public void MoveNumber()
-    {
-        st.MoveToParent();
+        //텍스트 컴포넌트 연결
+        st = GetComponentInChildren<TMP_Text>();
     }
 
     //글자 정보 갱신
     public void RefreshNumberInfor()
-    {
-        //start가 먼저 실행이 안되서 비었을때 대비용 if문
-        if(st == null)
-        {
-            st = GetComponentInChildren<StageText>();
-        }
-        if(st.TextMesh == null)
-        {
-            st.TextMesh = st.GetComponent<TMP_Text>();
-        }
+    { 
         //글자 정보 실제로 갱신하는부분
-        //디버그용, left가 비었으면 로그에 남김
-        Debug.Log(Data.left);
-        st.TextMesh.text = "" + Data.left;
+        st.text = "" + Data.left;
     }
 
     //클릭 시 다음 씬으로 넘어가기
