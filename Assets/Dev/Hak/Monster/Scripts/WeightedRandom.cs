@@ -3,29 +3,29 @@ using System.Collections.Generic;
 
 public class WeightedRandom
 {
-    private Random random;
-    private List<int> probabilities;
+    private Random _random;
+    private List<int> _probabilities;
 
     public WeightedRandom(List<int> weights)
     {
-        random = new Random();
-        probabilities = new List<int>();
+        _random = new Random();
+        _probabilities = new List<int>();
 
         int totalWeight = 0;
         foreach (int weight in weights)
         {
             totalWeight += weight;
-            probabilities.Add(totalWeight);
+            _probabilities.Add(totalWeight);
         }
     }
 
     public int GetRandomIndex()
     {
-        int randomNumber = random.Next(probabilities[probabilities.Count - 1]);
+        int randomNumber = _random.Next(_probabilities[_probabilities.Count - 1]);
 
-        for (int i = 0; i < probabilities.Count; i++)
+        for (int i = 0; i < _probabilities.Count; i++)
         {
-            if (randomNumber < probabilities[i])
+            if (randomNumber < _probabilities[i])
             {
                 return i;
             }

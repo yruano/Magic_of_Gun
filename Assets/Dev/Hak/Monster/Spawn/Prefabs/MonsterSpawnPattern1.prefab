@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2208703946170554947}
   - component: {fileID: -349695076030558330}
-  - component: {fileID: -8281057685553698658}
   m_Layer: 0
   m_Name: MonsterSpawnPattern1
   m_TagString: Untagged
@@ -51,22 +50,7 @@ MonoBehaviour:
   - {fileID: 2831289341180057623, guid: cad21b6a73a75254f8a3610d234b0664, type: 3}
   Pos:
   - {fileID: 2532911383973123650}
-  turnManager: {fileID: -8281057685553698658}
---- !u!114 &-8281057685553698658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4882252061448563374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde2b511241916a4590f54d8a27f5a84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnMonster: []
-  Player: {fileID: 0}
-  IsTurn: 0
+  Monsters: []
 --- !u!1 &8302600041113001225
 GameObject:
   m_ObjectHideFlags: 0

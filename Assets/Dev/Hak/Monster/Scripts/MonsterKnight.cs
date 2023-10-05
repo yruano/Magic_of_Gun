@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class MonsterBlueWizard : Monster
+public class MonsterKnight : Monster
 {
     public GameObject P_Bullet;
-    public MonsterBlueWizard()
+    public MonsterKnight()
     {
         Stats.DropItems = new[]
         {
@@ -16,13 +15,11 @@ public class MonsterBlueWizard : Monster
 
     private void Start()
     {
-        Weights = new List<int> { 5, 4, 3, 2 };
+        Weights = new List<int> { 1, 9 };
 
         Patterns.Add(PatternAttack);
         Patterns.Add(PatternRest);
-        Patterns.Add(PatternDefenseBuff);
-        Patterns.Add(PatternDamageBuff);
-        
+
         RandomPattern();
     }
 
@@ -46,30 +43,10 @@ public class MonsterBlueWizard : Monster
         yield return null;
     }
 
-    private IEnumerator PatternDefenseBuff()
-    {
-        Debug.Log("몬스터: 방어력 강화");
-        Stats.Defense += 5;
-
-        _patternDone = true;
-        RandomPattern();
-        yield return null;
-    }
-
-    private IEnumerator PatternDamageBuff()
-    {
-        Debug.Log("몬스터: 대미지 강화");
-        Stats.Damage += 5;
-
-        _patternDone = true;
-        RandomPattern();
-        yield return null;
-    }
-
     private IEnumerator PatternRest()
     {
         Debug.Log("몬스터: 휴식");
-        
+
         _patternDone = true;
         RandomPattern();
         yield return null;

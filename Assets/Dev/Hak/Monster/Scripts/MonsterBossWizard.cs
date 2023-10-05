@@ -51,11 +51,11 @@ public class MonsterBossWizard : Monster
         {
             if (_charge == 0)
             {
-                NextPattern = PatternChargeAttack;
+                _nextPattern = PatternChargeAttack;
             }
             else
             {
-                NextPattern = PatternRest;
+                _nextPattern = PatternRest;
             }
         }
         else if (_attributeCounter)
@@ -63,16 +63,16 @@ public class MonsterBossWizard : Monster
             if (_attributeCounterCount == 0)
             {
                 _attributeCounter = false;
-                NextPattern = Patterns[randomIndex];
+                _nextPattern = Patterns[randomIndex];
             }
             else
             {
-                NextPattern = PatternHeel;
+                _nextPattern = PatternHeel;
             }
         }
         else
         {
-            NextPattern = Patterns[randomIndex];
+            _nextPattern = Patterns[randomIndex];
         }
     }
 
@@ -167,8 +167,6 @@ public class MonsterBossWizard : Monster
         {
             Debug.Log("보스 : " + damage + "를 받았습니다.");
 
-            // if (_attribute is "")
-            // {
             if (Stats.Defense == 0)
             {
                 Stats.HP -= damage;
@@ -186,7 +184,6 @@ public class MonsterBossWizard : Monster
                     Stats.HP -= damage;
                 }
             }
-            // }
         }
         else
         {
@@ -221,10 +218,10 @@ public class MonsterBossWizard : Monster
 
     public override void Turn()
     {
-        if (_patternDone is true && NextPattern is not null)
+        if (_patternDone is true && _nextPattern is not null)
         {
             _patternDone = false;
-            CurrentPattern = StartCoroutine(NextPattern());
+            _currentPattern = StartCoroutine(_nextPattern());
 
             if (_attributeCounter)
             {
