@@ -7,7 +7,6 @@ public class MagicHeelArea : MonsterMagic
     private float _timer = 0f;
     private int _interval;
     private List<float> _intervals = new();
-    private int _count = 0;
 
     private void Awake()
     {
@@ -25,6 +24,7 @@ public class MagicHeelArea : MonsterMagic
     protected override void OnTriggerStay2D(Collider2D other)
     {
         _timer += Time.deltaTime;
+
         if (other.CompareTag("Knight") && _timer >= _intervals[_interval])
         {
             Heel_Cal(other);
