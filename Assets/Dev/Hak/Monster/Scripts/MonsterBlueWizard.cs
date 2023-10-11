@@ -22,16 +22,8 @@ public class MonsterBlueWizard : Monster
         Patterns.Add(PatternRest);
         Patterns.Add(PatternDefenseBuff);
         Patterns.Add(PatternDamageBuff);
-        
+
         RandomPattern();
-    }
-
-    private void RandomPattern()
-    {
-        WeightedRandom weightedRandom = new WeightedRandom(Weights);
-        int randomIndex = weightedRandom.GetRandomIndex();
-
-        _nextPattern = Patterns[randomIndex];
     }
 
     private IEnumerator PatternAttack()
@@ -40,6 +32,7 @@ public class MonsterBlueWizard : Monster
 
         var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
         bullet.GetComponent<MonsterMagic>().Damage = Stats.Damage;
+        bullet.GetComponent<MonsterMagic>().Speed = 5f;
 
         _patternDone = true;
         RandomPattern();
@@ -69,7 +62,7 @@ public class MonsterBlueWizard : Monster
     private IEnumerator PatternRest()
     {
         Debug.Log("몬스터: 휴식");
-        
+
         _patternDone = true;
         RandomPattern();
         yield return null;

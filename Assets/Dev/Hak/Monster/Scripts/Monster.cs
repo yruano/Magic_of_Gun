@@ -43,9 +43,17 @@ public class Monster : MonoBehaviour, IDamageable, ITurn
         }
     }
 
+    public virtual void RandomPattern()
+    {
+        WeightedRandom weightedRandom = new WeightedRandom(Weights);
+        int randomIndex = weightedRandom.GetRandomIndex();
+
+        _nextPattern = Patterns[randomIndex];
+    }
+
     public virtual void Damage(int damage)
     {
-        Debug.Log("몬스터 : " + damage + "를 받았습니다.");
+        Debug.Log("몬스터 데미지 : " + damage + "를 받았습니다.");
 
         if (Stats.Defense == 0)
         {
@@ -76,6 +84,9 @@ public class Monster : MonoBehaviour, IDamageable, ITurn
 
     public void Heel(int heel)
     {
+        Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        Debug.Log("몬스터 힐 : " + heel + "를 받았습니다.");
+
         if (Stats.HP + heel >= Stats.MaxHP)
         {
             Stats.HP = Stats.MaxHP;
@@ -84,6 +95,9 @@ public class Monster : MonoBehaviour, IDamageable, ITurn
         {
             Stats.HP += heel;
         }
+
+        Debug.Log("몬스터 남은 HP : " + Stats.HP);
+        Debug.Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     public virtual void Turn()

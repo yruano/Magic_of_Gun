@@ -39,15 +39,7 @@ public class MonsterBrownWizard : Monster
         Patterns.Add(PatternDefenseBuff);
         _nextPattern = PatternCounterAttack;
     }
-
-    private void RandomPattern()
-    {
-        WeightedRandom weightedRandom = new WeightedRandom(Weights);
-        int randomIndex = weightedRandom.GetRandomIndex();
-
-        _nextPattern = Patterns[randomIndex];
-    }
-
+    
     private IEnumerator PatternCounterAttack()
     {
         Debug.Log("몬스터: 카운터 시작");

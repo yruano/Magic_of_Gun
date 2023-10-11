@@ -45,7 +45,7 @@ public class Player : MonoBehaviour, IDamageable
     //데미지 피격구현
     public void Damage(int damage)
     {
-        Debug.Log("플레이어 : " + damage + "받았습니다.");
+        Debug.Log("플레이어 데미지 : " + damage + "받았습니다.");
         if (Stats.Shield == 0)
         {
             Stats.HP -= damage;

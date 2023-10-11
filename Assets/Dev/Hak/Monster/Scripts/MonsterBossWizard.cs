@@ -42,7 +42,7 @@ public class MonsterBossWizard : Monster
         RandomPattern();
     }
 
-    private void RandomPattern()
+    public override void RandomPattern()
     {
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();

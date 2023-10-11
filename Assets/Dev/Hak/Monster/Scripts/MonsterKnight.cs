@@ -23,14 +23,6 @@ public class MonsterKnight : Monster
         RandomPattern();
     }
 
-    private void RandomPattern()
-    {
-        WeightedRandom weightedRandom = new WeightedRandom(Weights);
-        int randomIndex = weightedRandom.GetRandomIndex();
-
-        _nextPattern = Patterns[randomIndex];
-    }
-
     private IEnumerator PatternAttack()
     {
         Debug.Log("몬스터: 공격");

@@ -11,6 +11,7 @@ TagManager:
   - WarHead
   - Bullet
   - StageButton
+  - Knight
   layers:
   - Default
   - TransparentFX

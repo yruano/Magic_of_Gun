@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MagicWaterBall : MonsterMagic
 {
-    public float Speed = 5f;
     private void Awake()
     {
         _rb2d = GetComponent<Rigidbody2D>();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,8 +6,10 @@ using UnityEngine;
 
 public class MonsterSpawnWizard : Monster
 {
-    public GameObject P_Bullet;
+    public GameObject P_Area;
+    public Transform MagicPos;
     public KnightSpawn KnightSpawn;
+    private List<Func<IEnumerator>> _knightLivePatterns = new();
     private string _spawnState;
     private int _patternCount;
     private bool _knightLive;
@@ -21,28 +24,38 @@ public class MonsterSpawnWizard : Monster
     private void Start()
     {
         _patternCount = 5;
-        Weights = new List<int> { 5, 4, 1 };
+        Weights = new List<int> { 8, 2 };
 
         Patterns.Add(PatternRest);
         Patterns.Add(PatternDefenseBuff);
-        Patterns.Add(PatternHeel);
+
+        _knightLivePatterns.Add(PatternRest);
+        _knightLivePatterns.Add(PatternHeel);
 
         _spawnState = "Impossible";
+        _knightLive = false;
         RandomPattern();
     }
-    private void RandomPattern()
+    public override void RandomPattern()
     {
         WeightedRandom weightedRandom = new WeightedRandom(Weights);
         int randomIndex = weightedRandom.GetRandomIndex();
 
-        if (_spawnState == "Impossible")
+        if (!_knightLive)
         {
-            _patternCount -= 1;
-            _nextPattern = Patterns[randomIndex];
+            if (_spawnState == "Impossible")
+            {
+                _patternCount -= 1;
+                _nextPattern = Patterns[randomIndex];
+            }
+            else
+            {
+                _nextPattern = PatternSpawn;
+            }
         }
         else
         {
-            _nextPattern = PatternSpawn;
+            _nextPattern = _knightLivePatterns[randomIndex];
         }
 
         if (_patternCount < 0)
@@ -71,8 +84,9 @@ public class MonsterSpawnWizard : Monster
     {
         Debug.Log("힐");
 
-        var bullet = Instantiate(P_Bullet, gameObject.transform.position, gameObject.transform.rotation);
+        var bullet = Instantiate(P_Area, MagicPos.position, MagicPos.rotation);
         bullet.GetComponent<MonsterMagic>().Heel = Stats.Damage;
+        bullet.GetComponent<MonsterMagic>().Speed = 1f;
 
         _patternDone = true;
         RandomPattern();
@@ -81,6 +95,7 @@ public class MonsterSpawnWizard : Monster
     private IEnumerator PatternSpawn()
     {
         Debug.Log("나이트 소환");
+        _knightLive = true;
         KnightSpawn.Spawn();
 
         _patternDone = true;
@@ -117,6 +132,16 @@ public class MonsterSpawnWizard : Monster
         {
             KnightSpawn.Done();
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (KnightSpawn.Monsters.Count == 1 && _knightLive)
+        {
+            _knightLive = false;
+            _patternCount = 5;
+            _spawnState = "Impossible";
         }
     }
 }
