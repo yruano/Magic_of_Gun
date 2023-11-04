@@ -33,13 +33,22 @@ public class Player : MonoBehaviour, IDamageable
 {
     public Rigidbody2D Rd2d;
     public PlayerStats Stats;
-    public PlayerItemTable ItemTable = new();
+    public PlayerItemTable PlayerItemTable = new();
+    public InventoryManager InventoryManager = new();
     public Item TestItem;
+    public Transform ItemContent;
+    public GameObject P_InventoryItem;
 
     private void Awake()
     {
         Rd2d = GetComponent<Rigidbody2D>();
         Stats = new();
+    }
+
+    protected virtual void Obscuration()
+    {
+        Stats.Shield += Stats.Shield_Increment;
+        Debug.Log(Stats.Shield);
     }
 
     //데미지 피격구현
@@ -88,25 +97,24 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (other.gameObject.CompareTag("Item"))
         {
-            TestItem = ItemTable.AddItem(0);
+            GameObject obj = Instantiate(P_InventoryItem, ItemContent);
+            TestItem = PlayerItemTable.AddItem(other.gameObject.GetComponent<TestItem>());
+            InventoryManager.InventoryTables(obj, TestItem);
+            Destroy(other);
         }
-    }
-
-    private void Obscuration()
-    {
-        Stats.Shield += Stats.Shield_Increment;
-        Debug.Log(Stats.Shield);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            TestItem = ItemTable.AddItem(0);
+            GameObject obj = Instantiate(P_InventoryItem, ItemContent);
+            TestItem = PlayerItemTable.AddItem();
+            InventoryManager.InventoryTables(obj, TestItem);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            ItemTable.RemoveItem(TestItem.ComputeHash());
+            PlayerItemTable.RemoveItem(TestItem.ComputeHash());
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {

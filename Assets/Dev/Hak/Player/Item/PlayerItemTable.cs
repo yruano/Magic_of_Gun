@@ -6,19 +6,28 @@ public class PlayerItemTable
 {
     public Dictionary<Hash128, Item> ItemTable = new();
 
-    public Item AddItem(int Id)
+    public Item AddItem(TestItem obj = null)
     {
         var item = new Item();
-        item.BaseData.Name = "몰라";
-        item.BaseData.Desc = "테스트";
-        item.BaseData.ItemType = "글자";
+        
+        item.BaseData.Name = obj.Name;
+        item.BaseData.Desc = obj.Desc;
+        item.BaseData.ItemType = obj.ItemType;
+        item.BaseData.Image = obj.Image;
 
-        var exbulletdata = new ItemBulletData();
-        exbulletdata.BulletBaseData.Damage = 10;
-        exbulletdata.BulletBaseData.PartType = "탄두";
-        exbulletdata.BulletBaseData.Percent = 1.0f;
+        switch (obj.ItemType)
+        {
+            case "총알":
+                var exbulletdata = new ItemBulletData();
+                exbulletdata.BulletBaseData.Damage = obj.Damage;
+                exbulletdata.BulletBaseData.PartType = obj.PartType;
+                exbulletdata.BulletBaseData.Percent = obj.Percent;
+                item.ItemData = exbulletdata;
+                break;
 
-        item.ItemData = exbulletdata;
+            default:
+                break;
+        }
 
         Hash128 hash = item.ComputeHash();
         if (ItemTable.ContainsKey(hash))

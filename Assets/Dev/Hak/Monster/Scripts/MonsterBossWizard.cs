@@ -5,14 +5,14 @@ using UnityEngine;
 public class MonsterBossWizard : Monster
 {
     public GameObject P_Bullet;
-    private bool _attributeCounter;
+    private bool _elementCounter;
     private bool _chargeAttack;
-    private int _attributeCounterCount;
+    private int _elementCounterCount;
     private int _maxCount;
     private int _charge;
     private int _heel;
-    private List<string> _attributes;
-    private string _attribute = "";
+    private List<string> _elements;
+    private string _element = "";
     public MonsterBossWizard()
     {
         Stats.DropItems = new[]
@@ -24,7 +24,7 @@ public class MonsterBossWizard : Monster
     private void Start()
     {
         Weights = new List<int> { 5, 4, 3, 2, 1 };
-        _attributes = new List<string> { "Fire", "Water", "Earth", "Wind" };
+        _elements = new List<string> { "Fire", "Water", "Earth", "Wind" };
 
         Patterns.Add(PatternAttack);
         Patterns.Add(PatternRest);
@@ -32,10 +32,10 @@ public class MonsterBossWizard : Monster
         Patterns.Add(PatternCharge);
         Patterns.Add(PatternDeleteBullet);
 
-        _attributeCounter = false;
+        _elementCounter = false;
         _chargeAttack = false;
         _charge = 0;
-        _attributeCounterCount = 0;
+        _elementCounterCount = 0;
         _maxCount = 5;
         _heel = 5;
 
@@ -58,11 +58,11 @@ public class MonsterBossWizard : Monster
                 _nextPattern = PatternRest;
             }
         }
-        else if (_attributeCounter)
+        else if (_elementCounter)
         {
-            if (_attributeCounterCount == 0)
+            if (_elementCounterCount == 0)
             {
-                _attributeCounter = false;
+                _elementCounter = false;
                 _nextPattern = Patterns[randomIndex];
             }
             else
@@ -99,11 +99,11 @@ public class MonsterBossWizard : Monster
     {
         Debug.Log("보스: 속성 카운터");
 
-        _attributeCounter = true;
-        _attributeCounterCount = _maxCount;
+        _elementCounter = true;
+        _elementCounterCount = _maxCount;
 
-        int index = Random.Range(0, _attributes.Count);
-        _attribute = _attributes[index];
+        int index = Random.Range(0, _elements.Count);
+        _element = _elements[index];
 
         _patternDone = true;
         RandomPattern();
@@ -163,7 +163,7 @@ public class MonsterBossWizard : Monster
 
     public override void Damage(int damage)
     {
-        if (_attributeCounter)
+        if (_elementCounter)
         {
             Debug.Log("보스 : " + damage + "를 받았습니다.");
 
@@ -223,9 +223,9 @@ public class MonsterBossWizard : Monster
             _patternDone = false;
             _currentPattern = StartCoroutine(_nextPattern());
 
-            if (_attributeCounter)
+            if (_elementCounter)
             {
-                _attributeCounterCount -= 1;
+                _elementCounterCount -= 1;
             }
             else if (_chargeAttack)
             {

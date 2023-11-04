@@ -135,7 +135,7 @@ public class MonsterSpawnWizard : Monster
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
         if (KnightSpawn.Monsters.Count == 1 && _knightLive)
         {
