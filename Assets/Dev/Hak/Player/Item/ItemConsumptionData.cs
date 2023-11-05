@@ -4,20 +4,21 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 
 [StructLayout(LayoutKind.Sequential)]
-public struct ItemGunBaseData
+public struct ItemConsumptionBaseData
 {
-    public int Damage;
+    public int Count;
+    public int Heel;
     public float Percent;
     public string PartType;
     public string Element;
 }
-public class ItemGunData : ItemData
+public class ItemConsumptionData : ItemData
 {
-    ItemGunBaseData GunBaseData;
+    ItemConsumptionBaseData ConsumptionBaseData;
     public override Hash128 ComputeHash()
     {
         Hash128 hash = new();
-        HashUtilities.ComputeHash128(ref GunBaseData, ref hash);
+        HashUtilities.ComputeHash128(ref ConsumptionBaseData, ref hash);
         return hash;
     }
 }
