@@ -9,6 +9,7 @@ public struct ItemBaseData
     public string Name;
     public string Desc;
     public string ItemType;
+    public string Price;
     public Sprite Image;
 }
 
