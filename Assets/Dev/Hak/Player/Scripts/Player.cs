@@ -29,7 +29,7 @@ public class PlayerStats
     }
 }
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour, IDamageable, IInventorySetter
 {
     public Rigidbody2D Rd2d;
     public PlayerStats Stats;
@@ -93,13 +93,29 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void SetItem(Item item)
+    {
+        Debug.Log("인벤토리에 추가됨!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        // GameObject obj = Instantiate(P_InventoryItem, ItemContent);
+        // TestItem = PlayerItemTable.AddItem(item);
+        // InventoryManager.InventoryTables(obj, TestItem);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Item"))
         {
+
             GameObject obj = Instantiate(P_InventoryItem, ItemContent);
             TestItem = PlayerItemTable.AddItem(other.gameObject.GetComponent<TestItem>());
             InventoryManager.InventoryTables(obj, TestItem);
+
+            if (other.gameObject.GetComponent<TestItem>() == null)
+            {
+                Item item = other.gameObject.GetComponent<Item>();
+                SetItem(item);
+            }
+
             Destroy(other);
         }
     }

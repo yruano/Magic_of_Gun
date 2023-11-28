@@ -12,6 +12,8 @@ TagManager:
   - Bullet
   - StageButton
   - Knight
+  - ItemTable
+  - ShopManager
   layers:
   - Default
   - TransparentFX
