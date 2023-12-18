@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1498822460390684886}
   - component: {fileID: 5184689354335441369}
   m_Layer: 0
-  m_Name: Sample Stage
+  m_Name: Rest
   m_TagString: StageButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,4 +133,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fab3b44c97abe640ac27a8bf77d28f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: Test
+  nextScene: Rest

@@ -16,21 +16,20 @@ public class BulletSlider : MonoBehaviour
     private Camera mainCamera = null;
     [SerializeField]
     public GameObject slider = null;
-    // Start is called before the first frame update
+
     void Start()
     {
         //마우스 클릭 이벤트 전달 위해 매니저 연결
         AM = FindObjectOfType<AssembleManeger>();
+
         //우클릭 이벤트 리스너 등록
-        //우클릭시 슬라이더를 숨기고
+        //우클릭시 슬라이더를 숨김 + 데이터 이동
         AM.RightClick += HideSlider;
-        //슬라이더 value값을 이동
-        AM.RightClick += TransferValue;
 
         //메인 카메라 연결
         mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
-        //슬라이더의 부모, 배경에 남는 그림도 숨기기 위해 부모를 연결, 앞으로는 간결함을 위해 슬라이더의 부모가 아닌 슬라이더라고 칭함
+        //슬라이더연결, 사실 부모오브젝트지만 배경에 남는 그림도 숨기기 위해 부모를 연결, 앞으로는 간결함을 위해 슬라이더의 부모가 아닌 슬라이더라고 칭함
         slider = transform.Find("Canvas").gameObject;
         //슬라이더 끄기
         slider.SetActive(false);
@@ -47,10 +46,7 @@ public class BulletSlider : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //슬라이더를 비 활성화 시킴
-            slider.SetActive(false);
-            //데이터 이동
-            TransferValue();
-
+            HideSlider();
         }
     }
     //마우스 좌클릭을 놓을 시 슬라이더가 옮겨가고, 활성화됨
@@ -66,10 +62,13 @@ public class BulletSlider : MonoBehaviour
         slider.transform.Find("Slider").GetComponent<RectTransform>().position = mainCamera.WorldToScreenPoint(tmpPosition);
     }
 
-    //슬라이더 숨기는 함수.
-    private void HideSlider()
+    //슬라이더 숨기고 데이터 이동시키는 함수
+    public void HideSlider()
     {
+        //슬라이더 숨기고
         slider.SetActive(false);
+        //데이터 bullet으로 전달
+        TransferValue();
     }
 
     //슬라이더 value를 bullet컴포넌트에 전달

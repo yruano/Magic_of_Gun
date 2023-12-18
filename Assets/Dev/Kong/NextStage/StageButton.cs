@@ -8,37 +8,33 @@ using UnityEngine.SceneManagement;
 //스테이지 버튼이 가져야할 요소를 가짐
 public class StageButton : MonoBehaviour
 {
-    //보스층까지 필요한 턴 수 표시하는 글자
-    [SerializeField]
-    TMP_Text st = null;
     //생성시 필요한 정보를 가지는곳
-    [SerializeField]
     public NextStage Data;
     //넘어갈 다음 씬이름
-    [SerializeField]
     public string nextScene = "";
+    //해당 층에서의 구별ID
+    public int onFloorID = -1;
+    //연결된 다음 층의 버튼ID
+    public List<int> connectedFloorID = new List<int>();
 
-    //초기화
+    /*
+    //초기화//현재 기능없음
     public void Awake()
     {
-        //텍스트 컴포넌트 연결
-        st = GetComponentInChildren<TMP_Text>();
+        
     }
-
-    //글자 정보 갱신
-    public void RefreshNumberInfor()
-    { 
-        //글자 정보 실제로 갱신하는부분
-        st.text = "" + Data.left;
-    }
+    */
 
     //클릭 시 다음 씬으로 넘어가기
     public void OnMouseDown()
     {
+        //부모 있는지 확인해서 있다면 이름 연결, 없다면 ---- 적음
+        string parentName = 
+            transform.parent == null    ?    "----" : transform.parent.name;
         //제대로 입력되어 있을때만 넘어가기
-        if (nextScene != "")
-            Debug.Log($"{gameObject.name}: Connected Wrong Scene");
+        if (nextScene == "")
+            Debug.Log($"{parentName} | {gameObject.name}: No Connected Scene");
         else
-            Debug.Log($"{gameObject.name}: No Connected Scene"); 
+            Debug.Log($"{parentName} | {gameObject.name}: Function Not Ready, Work In Progress");
     }
 }

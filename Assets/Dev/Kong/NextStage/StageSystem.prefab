@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7028267685295660656}
   - component: {fileID: 9206188400669949142}
+  - component: {fileID: 4514198060080691547}
   m_Layer: 0
-  m_Name: System
+  m_Name: StageSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,14 +45,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12728ef4455da6c40b5c6c8edc6fee6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  y: 2
-  xMin: -9.5
-  xMax: 9.5
-  count: 0
+  buttons: []
+  basicData:
+    y: 2
+    xMin: -9.5
+    xMax: 9.5
+    count: 6
   prefeb: {fileID: 4354111294698685523, guid: e3d507e26c6904c4490776db82146086, type: 3}
   originSprites:
   - {fileID: 21300000, guid: d617315efa3a9164fbe90eb464d22ddf, type: 3}
   - {fileID: 21300000, guid: 4efa64eea84d7f145921ef96bfa6462d, type: 3}
   - {fileID: 21300000, guid: d5e8cd866d5592641b6648d2cb349733, type: 3}
   - {fileID: 21300000, guid: 6fd58500a7b036246bfe678fd4e804a0, type: 3}
-  buttons: []
+--- !u!114 &4514198060080691547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9036157852347461391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80f964bd4a15cd49a072223cde2fdb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerDeploy: {fileID: 9206188400669949142}
+  BasicData:
+    y: 0
+    xMin: 0
+    xMax: 0
+    count: 0
+  yMin: -3
+  yMax: 6
+  xMin: -9.5
+  xMax: 9.5
+  layerButton: 0300000005000000080000000c000000
+  prefeb: {fileID: 0}
+  Map: []
+  mapObject: {fileID: 0}

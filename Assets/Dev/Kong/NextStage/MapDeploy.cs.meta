@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: d80f964bd4a15cd49a072223cde2fdb0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - layerDeploy: {instanceID: 0}
+  - prefeb: {fileID: 4354111294698685523, guid: e3d507e26c6904c4490776db82146086, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -238,9 +238,9 @@ GameObject:
   m_Component:
   - component: {fileID: 845381419664973263}
   - component: {fileID: 1623202612460883158}
-  - component: {fileID: 7681808135769528891}
   - component: {fileID: 7070116245095025651}
   - component: {fileID: -7031222501181184832}
+  - component: {fileID: 6218309223067513446}
   m_Layer: 0
   m_Name: Assembling Bullet
   m_TagString: Bullet
@@ -271,13 +271,45 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5866114514221162674}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d735636d11e4170459d949d1f45cc5e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!61 &7681808135769528891
-BoxCollider2D:
+  isFollowingMouse: 0
+--- !u!114 &7070116245095025651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866114514221162674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e00200ff46d27df419486faa25324ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 0
+  cartridgeColor: {r: 0, g: 0, b: 0, a: 0}
+  warHeadColor: {r: 0, g: 0, b: 0, a: 0}
+  Warhead: {fileID: 0}
+  CartridgeCase: {fileID: 0}
+  charge: 0
+--- !u!114 &-7031222501181184832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5866114514221162674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d3356429f126c4aaa6002e604b32a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AM: {fileID: 0}
+--- !u!60 &6218309223067513446
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -318,38 +350,15 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &7070116245095025651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5866114514221162674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e00200ff46d27df419486faa25324ffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 0
-  cartridgeColor: {r: 0, g: 0, b: 0, a: 0}
-  warHeadColor: {r: 0, g: 0, b: 0, a: 0}
-  Warhead: {fileID: 0}
-  CartridgeCase: {fileID: 0}
---- !u!114 &-7031222501181184832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5866114514221162674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95d3356429f126c4aaa6002e604b32a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Points:
+    m_Paths:
+    - - {x: 1, y: 0.5}
+      - {x: -1, y: 0.5}
+      - {x: -1, y: -0.5}
+      - {x: 1, y: -0.5}
+      - {x: 1.4, y: -0.3}
+      - {x: 1.4, y: 0.3}
+  m_UseDelaunayMesh: 0
 --- !u!1 &6014505874882869361
 GameObject:
   m_ObjectHideFlags: 0

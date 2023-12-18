@@ -5,8 +5,8 @@ using UnityEngine;
 public class MouseDrag : MonoBehaviour
 {
     //마우스를 따라가는지 안따라가는지 체크
-    private bool isFollowingMouse = false;
-    //
+    public bool isFollowingMouse = false;
+    //오브젝트 중심부와 마우스 클릭 위치 차이 기억
     private Vector3 offset = Vector3.zero;
 
     //오브젝트가 움직이게 만드는 부분
@@ -44,4 +44,5 @@ public class MouseDrag : MonoBehaviour
         //따라가지 않도록 설정
         isFollowingMouse = false; 
     }
+
 }
