@@ -6,17 +6,22 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
+    public Transform Content;
     public List<GameObject> ShopSlots = new();
-    public Collider2D Player = new();
-    public Collider2D ItemTable = new();
+    public GameObject P_Slots;
+    private Collider2D Player;
+    private Collider2D ItemTable;
 
     void Start()
     {
-        foreach (var slot in ShopSlots)
+        for (int i = 0; i < 8; i++)
         {
+            var slot = Instantiate(P_Slots, Content);
+            slot.AddComponent<Button>();
             var button = slot.GetComponent<Button>();
 
-            button.onClick.AddListener(() => SetInventory(slot.GetComponent<SlotItemData>()));
+            ShopSlots.Add(slot);
+            button.onClick.AddListener(() => SetInventory());
         }
     }
 
@@ -29,12 +34,13 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void SetInventory(SlotItemData slot)
+    public void SetInventory()
     {
         Debug.Log("버튼 눌림!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        GameObject slot = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
 
         var setItem = Player.GetComponent<IInventorySetter>();
-        setItem?.SetItem(slot.Slot);
+        setItem?.SetItem(slot.GetComponent<SlotItemData>().Slot);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
