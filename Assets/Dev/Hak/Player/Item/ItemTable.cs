@@ -24,7 +24,7 @@ public class ItemTable : MonoBehaviour, IItemGetter, IItemSearch
             slotIcon.sprite = Table[KeyTable[index]].BaseData.Image;
             slotName.text = Table[KeyTable[index]].BaseData.Name;
             slotPrice.text = Table[KeyTable[index]].BaseData.Price;
-            slotdata.Slot = Table[KeyTable[index]];
+            slotdata.Slot = KeyTable[index];
         }
         else
         {

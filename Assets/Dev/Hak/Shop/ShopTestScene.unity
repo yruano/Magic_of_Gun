@@ -425,8 +425,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1083868498}
-  - component: {fileID: 1083868500}
   - component: {fileID: 1083868499}
+  - component: {fileID: 1083868500}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -481,15 +481,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 40
+    m_Left: 50
     m_Right: 0
-    m_Top: 0
+    m_Top: 50
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 230, y: 150}
-  m_Spacing: {x: 0, y: 150}
+  m_CellSize: {x: 150, y: 150}
+  m_Spacing: {x: 100, y: 140}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!1 &1244938372
@@ -621,7 +621,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: -17, y: -70}
+  m_SizeDelta: {x: 0, y: -70}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1724783631
 MonoBehaviour:
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Content: {fileID: 1083868498}
   ShopSlots: []
-  P_Slots: {fileID: 9027358950007140440, guid: 5a80d4e19b12c8048b3eb651a9cec56a, type: 3}
+  P_Slots: {fileID: 8029631983176623167, guid: e4ac915efffbd964f84e4c410e9b50af, type: 3}
 --- !u!4 &2119551489
 Transform:
   m_ObjectHideFlags: 0

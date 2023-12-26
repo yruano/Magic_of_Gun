@@ -18,10 +18,10 @@ public class ShopManager : MonoBehaviour
         {
             var slot = Instantiate(P_Slots, Content);
             slot.AddComponent<Button>();
-            var button = slot.GetComponent<Button>();
+            Button button = slot.GetComponent<Button>();
 
-            ShopSlots.Add(slot);
             button.onClick.AddListener(() => SetInventory());
+            ShopSlots.Add(slot);
         }
     }
 
@@ -37,10 +37,6 @@ public class ShopManager : MonoBehaviour
     public void SetInventory()
     {
         Debug.Log("버튼 눌림!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        GameObject slot = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-
-        var setItem = Player.GetComponent<IInventorySetter>();
-        setItem?.SetItem(slot.GetComponent<SlotItemData>().Slot);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
