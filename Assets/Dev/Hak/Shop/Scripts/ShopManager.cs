@@ -37,6 +37,10 @@ public class ShopManager : MonoBehaviour
     public void SetInventory()
     {
         Debug.Log("버튼 눌림!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+        GameObject clickedButton = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+
+        Player.GetComponent<IInventorySetter>()?.SetItem(clickedButton.GetComponent<SlotItemData>().Slot);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
