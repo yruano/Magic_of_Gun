@@ -5,5 +5,5 @@ using UnityEngine.UI;
 
 public class SlotItemData : MonoBehaviour
 {
-    public Hash128 Slot = new();
+    public Item Slot = new();
 }
