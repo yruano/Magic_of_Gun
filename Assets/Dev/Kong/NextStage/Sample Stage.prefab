@@ -133,4 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fab3b44c97abe640ac27a8bf77d28f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: Test
+  nextScene: '-'
+  onFloorID: -1
+  connectedFloorID: 

@@ -452,6 +452,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4514198060080691547, guid: 25fb92960fba2d2498633668566259d7, type: 3}
+      propertyPath: layerButton.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514198060080691547, guid: 25fb92960fba2d2498633668566259d7, type: 3}
+      propertyPath: layerButton.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514198060080691547, guid: 25fb92960fba2d2498633668566259d7, type: 3}
+      propertyPath: layerButton.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514198060080691547, guid: 25fb92960fba2d2498633668566259d7, type: 3}
+      propertyPath: layerButton.Array.data[2]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514198060080691547, guid: 25fb92960fba2d2498633668566259d7, type: 3}
+      propertyPath: layerButton.Array.data[3]
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514198060080691547, guid: 25fb92960fba2d2498633668566259d7, type: 3}
+      propertyPath: layerButton.Array.data[4]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7028267685295660656, guid: 25fb92960fba2d2498633668566259d7, type: 3}
       propertyPath: m_RootOrder
       value: 3

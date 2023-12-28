@@ -50,7 +50,7 @@ public class LayerDeploy : MonoBehaviour
     public List<GameObject> GenerateButton()
     {
         //초기화
-        buttons.Clear();
+        buttons = new List<GameObject>();
         //몇번째 객체인지 기록용 변수
         int i = 1;
         foreach (var stage in oneStageFloor)
@@ -108,17 +108,25 @@ public class LayerDeploy : MonoBehaviour
     {
         //같은 층 객체를 묶을 부모생성
         GameObject newLayer = new GameObject("floor_" + floorLevel);
+        //층 객체의 정보를 담을 컴포넌트 부착
+        newLayer.AddComponent<Layer>();
+
         //대표 Y축 위치로 이동
         newLayer.transform.position = new Vector3(0, basicData.y, 0);
         //변수 설정
         basicData.count = count;
-        //층 생성 후
+
+        //층에 들어갈 버튼 생성
         GenerateOneFloor();
-        //한개의 객체의 자식으로 등록 후
+        //버튼들을 층 객체의 자식으로 등록
         foreach (GameObject onebutton in buttons)
         {
             onebutton.transform.SetParent(newLayer.transform);
         }
+        //컴포넌트에 생성된 버튼들 전달
+        newLayer.GetComponent<Layer>().buttons = buttons;
+
+        //호출한 곳에 버튼들 정보 전달함
         floor = buttons;
         //등록한 객체를 반환
         return newLayer;

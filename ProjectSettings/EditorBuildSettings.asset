@@ -14,5 +14,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Dev/Kong/NextStage.unity
     guid: a64b8029670038449abf9f80623ba958
+  - enabled: 1
+    path: Assets/Dev/Kong/shootingScene.unity
+    guid: 586e6d97095926a46965023ecf2940f9
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 1029dd112d19d8845b68198df5cfc4b6, type: 2}

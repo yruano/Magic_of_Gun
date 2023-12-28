@@ -17,24 +17,54 @@ public class StageButton : MonoBehaviour
     //연결된 다음 층의 버튼ID
     public List<int> connectedFloorID = new List<int>();
 
-    /*
-    //초기화//현재 기능없음
-    public void Awake()
-    {
-        
-    }
-    */
-
     //클릭 시 다음 씬으로 넘어가기
     public void OnMouseDown()
     {
         //부모 있는지 확인해서 있다면 이름 연결, 없다면 ---- 적음
         string parentName = 
-            transform.parent == null    ?    "----" : transform.parent.name;
+            transform.parent == null ? "----" : transform.parent.name;
         //제대로 입력되어 있을때만 넘어가기
-        if (nextScene == "")
+        if (nextScene == "" || nextScene == "-")
             Debug.Log($"{parentName} | {gameObject.name}: No Connected Scene");
         else
-            Debug.Log($"{parentName} | {gameObject.name}: Function Not Ready, Work In Progress");
+        {
+            //씬 이동
+            SceneManager.LoadScene(nextScene);
+            //map객체 끄기(부모의 부모)
+            transform.parent.parent.GetComponent<Map>().OffFloors();
+        }
+    }
+
+    //클릭 불가모드
+    public void OffClick()
+    {
+        //클릭 받을 콜라이더를 끔
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+
+        //반투명하게 만듬
+        //현재 색상 저장
+        Color currentColor = gameObject.GetComponent<SpriteRenderer>().color;
+
+        //알파값 변경
+        currentColor.a = 0.4f;
+
+        //변경된 값 적용
+        gameObject.GetComponent<SpriteRenderer>().color = currentColor;
+    }
+    //클릭 가능 모드
+    public void OnClick()
+    {
+        //클릭 받을 콜라이더를 켬
+        gameObject.GetComponent<CircleCollider2D>().enabled = true;
+
+        //불투명하게 만듬
+        //현재 색상 저장
+        Color currentColor = gameObject.GetComponent<SpriteRenderer>().color;
+
+        //알파값 변경
+        currentColor.a = 1f;
+
+        //변경된 값 적용
+        gameObject.GetComponent<SpriteRenderer>().color = currentColor;
     }
 }
